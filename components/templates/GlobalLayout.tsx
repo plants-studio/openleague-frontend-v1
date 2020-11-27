@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import style from './GlobalLayout.module.scss';
 import AccountArea from '../organisms/AccountArea';
 import NavigatorArea from '../organisms/NavigatorArea';
+import DividerLine from '../atoms/DividerLine';
+import { Button } from 'plants-ui';
 
 interface IProps {
   children: React.ReactNode;
@@ -41,11 +43,15 @@ const Child = ({ children }: IProps) => {
         <div className={style.leftnavigator}>
           <div className={style.itemarea}>
             <AccountArea />
+            <DividerLine margin="20px" />
             <NavigatorArea isLeftNavigatorMode={true} />
+            <Button themeType="primary">테스트용</Button>
           </div>
         </div>
       ) : (
-        <div className={style.bottomnavigator}></div>
+        <div className={style.bottomnavigator}>
+          <NavigatorArea isLeftNavigatorMode={false} />
+        </div>
       )}
       <div className={style.contentwrapper}>
         <div className={style.contentsarea}>{children}</div>
