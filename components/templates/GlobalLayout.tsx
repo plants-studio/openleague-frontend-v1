@@ -45,7 +45,6 @@ const Child = ({ children }: IProps) => {
             <AccountArea />
             <DividerLine margin="20px" />
             <NavigatorArea isLeftNavigatorMode={true} />
-            <Button themeType="primary">테스트용</Button>
           </div>
         </div>
       ) : (

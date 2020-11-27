@@ -1,13 +1,22 @@
+import Cookies from 'js-cookie';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import GlobalLayout from './../components/templates/GlobalLayout';
 
-export default function Home() {
+export default function Index() {
+  const [accessToken, setAccessToken] = useState(null);
+
+  const [UserName, setUserName] = useState('');
+
+  useEffect(() => {
+    if (Cookies.get('accessToken') !== null && Cookies.get('name') !== null) {
+      setUserName(Cookies.get('name'));
+      setAccessToken(Cookies.get('accessToken'));
+    }
+  }, []);
+
   return (
     <div>
-      <Head>
-        <title>오픈리그 | 모든 게이머를 위한 ALL-IN-ONE 플랫폼</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <GlobalLayout>
         가나다라
         <br />

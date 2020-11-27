@@ -17,16 +17,7 @@ const NavigatorArea = ({ isLeftNavigatorMode }: IProps) => {
             width="100%"
             isSelected={router.pathname === '/'}
             onClick={() => {
-              router.push('/magazine');
-            }}
-          >
-            <Icon icon="gameController" />
-            매거진
-          </NavButton>
-          <NavButton
-            width="100%"
-            onClick={() => {
-              router.push('/openleague');
+              router.push('/');
             }}
           >
             <Icon icon="trophy" />
@@ -34,6 +25,7 @@ const NavigatorArea = ({ isLeftNavigatorMode }: IProps) => {
           </NavButton>
           <NavButton
             width="100%"
+            isSelected={router.pathname === '/community'}
             onClick={() => {
               router.push('/community');
             }}
@@ -43,6 +35,7 @@ const NavigatorArea = ({ isLeftNavigatorMode }: IProps) => {
           </NavButton>
           <NavButton
             width="100%"
+            isSelected={router.pathname === '/home'}
             onClick={() => {
               router.push('/home');
             }}
