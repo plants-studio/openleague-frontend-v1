@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import style from './GlobalLayout.module.scss';
+import AccountArea from './../organisms/AccountArea';
 
 interface IProps {
   children: React.ReactNode;
@@ -29,17 +30,18 @@ const Child = ({ children }: IProps) => {
     function handleResize() {
       setWidth(window.innerWidth);
     }
-
     window.addEventListener('resize', handleResize);
     setWidth(window.innerWidth);
-
-    // This is where your layout effect logic can be
   });
 
   return (
     <div className={style.viewwrapper}>
       {width > 450 ? (
-        <div className={style.leftnavigator}></div>
+        <div className={style.leftnavigator}>
+          <div className={style.itemarea}>
+            <AccountArea />
+          </div>
+        </div>
       ) : (
         <div className={style.bottomnavigator}></div>
       )}
