@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/core": "10.1.0",
     "next": "10.0.2",
     "plants-ui": "^1.0.3",
     "react": "17.0.1",

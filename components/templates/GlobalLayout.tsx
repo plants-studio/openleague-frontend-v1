@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import style from './GlobalLayout.module.scss';
-import AccountArea from './../organisms/AccountArea';
+import AccountArea from '../organisms/AccountArea';
+import NavigatorArea from '../organisms/NavigatorArea';
 
 interface IProps {
   children: React.ReactNode;
@@ -40,6 +41,7 @@ const Child = ({ children }: IProps) => {
         <div className={style.leftnavigator}>
           <div className={style.itemarea}>
             <AccountArea />
+            <NavigatorArea isLeftNavigatorMode={true} />
           </div>
         </div>
       ) : (
