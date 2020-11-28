@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import GlobalLayout from './../components/templates/GlobalLayout';
-
 import Counter from './../components/test/Counter';
 
 export default function Home() {
