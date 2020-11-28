@@ -3,7 +3,7 @@ import { Card } from 'plants-ui';
 import useUser from './../../src/hooks/useUser';
 
 const SigninCard = () => {
-  const { isLogin, email, password, authLogin, authLogout } = useUser();
+  const { isLogin, email, name, authLogin, authLogout } = useUser();
 
   const [account, setAccount] = useState({
     email: '',
@@ -19,6 +19,12 @@ const SigninCard = () => {
 
   return (
     <Card cardTitle="로그인">
+      {isLogin ? <span>환영합니다!</span> : <span>로그인 안됨</span>}
+      <br />
+      <span>
+        이메일 : {email} | 이름 : {name}
+      </span>
+      <br />
       <input
         type="text"
         name="email"

@@ -14,7 +14,6 @@ const GlobalLayout = ({ children }: IProps) => {
 
   // Wait until after client-side hydration to show
   useEffect(() => {
-    console.log('run useEffect');
     setShowChild(true);
   }, []);
 

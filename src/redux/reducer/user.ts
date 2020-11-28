@@ -1,67 +1,51 @@
-import axios from 'axios';
-import { call, put, takeEvery, delay } from 'redux-saga/effects';
-import { authSignin } from './../../api/auth';
 import { DefaultLoginProps } from '../../types/authType';
-import { stat } from 'fs';
 
-const LOGIN = 'user/LOGIN' as const;
-const LOGOUT = 'user/LOGOUT' as const;
+export const LOGIN_REQUEST = 'user/LOGIN_REQUEST' as const;
+export const LOGOUT = 'user/LOGOUT' as const;
+export const LOGIN_SUCCESS = 'user/LOGIN_SUCCESS' as const;
+export const LOGIN_FAILURE = 'user/LOGIN_FAILURE' as const;
 
 export const login = (diff: DefaultLoginProps) => ({
-  type: LOGIN,
+  type: LOGIN_REQUEST,
   payload: diff,
 });
 export const logout = () => ({ type: LOGOUT });
+export const loginSuccess = (diff: DefaultLoginProps) => ({
+  type: LOGIN_SUCCESS,
+  payload: diff,
+});
+export const loginFailure = () => ({ type: LOGIN_FAILURE });
 
-type UserAction = ReturnType<typeof login> | ReturnType<typeof logout>;
+type UserAction =
+  | ReturnType<typeof login>
+  | ReturnType<typeof logout>
+  | ReturnType<typeof loginSuccess>
+  | ReturnType<typeof loginFailure>;
 
 type UserState = {
   isLogin: boolean;
   email: string;
-  password: string;
+  name: string;
 };
 
 const initialState: UserState = {
   isLogin: false,
   email: 'non-login-email',
-  password: 'non-login-password',
+  name: 'non-login-name',
 };
-
-function* getUserSaga(action) {
-  console.log('Saga 로그인 진입');
-  try {
-    const response = yield call(
-      authSignin,
-      action.payload.email,
-      action.payload.password,
-    );
-    yield put({ type: LOGIN, payload: response });
-  } catch (e) {
-    console.log('로그인 실패(saga에서 호출)');
-    //yield put({type:})
-  }
-}
-
-function* logoutSaga(action) {
-  yield delay(3000);
-  console.log('로그아웃 성공');
-}
-
-export function* userSaga() {
-  yield takeEvery(LOGIN, getUserSaga);
-  yield takeEvery(LOGOUT, logoutSaga);
-}
 
 function user(state = initialState, action: UserAction) {
   switch (action.type) {
-    case LOGIN:
+    case LOGIN_REQUEST:
+      return state;
+    case LOGIN_SUCCESS:
       return {
         isLogin: true,
         email: action.payload.email,
-        password: action.payload.password,
+        name: action.payload.password,
       };
     case LOGOUT:
-      return { isLogin: false, email: '', password: '' };
+      return { isLogin: false, email: '', name: '' };
     default:
       return state;
   }

@@ -7,7 +7,7 @@ import { DefaultLoginProps } from '../types/authType';
 export default function useCounter() {
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
   const email = useSelector((state: RootState) => state.user.email);
-  const password = useSelector((state: RootState) => state.user.password);
+  const name = useSelector((state: RootState) => state.user.name);
   const dispatch = useDispatch();
 
   const authLogin = useCallback(
@@ -19,7 +19,7 @@ export default function useCounter() {
   return {
     isLogin,
     email,
-    password,
+    name,
     authLogin,
     authLogout,
   };
