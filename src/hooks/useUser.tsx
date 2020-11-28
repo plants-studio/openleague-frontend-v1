@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/reducer';
-import { login, logout } from '../redux/reducer/user';
+import { login, logout } from '../redux/reducer/userReducer';
 import { useCallback } from 'react';
 import { DefaultLoginProps } from '../types/authType';
 

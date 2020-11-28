@@ -5,7 +5,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-} from './../reducer/user';
+} from '../reducer/userReducer';
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
@@ -27,8 +27,11 @@ function* requestUserSaga(action) {
     );
     if (response.status === 200) {
       console.log('Axios : success');
-      Cookies.set('accessToken', response.data.accessToken);
-      Cookies.set('refreshToken', response.data.refreshToken);
+      Cookies.set('accessToken', response.data.accessToken, { expires: 7 });
+      Cookies.set('refreshToken', response.data.refreshToken, {
+        expires: 7,
+        HttpOnly: true,
+      });
       const decoded: {
         user: {
           name: string;
@@ -50,11 +53,13 @@ function* requestUserSaga(action) {
     switch (e.response.status) {
       case 401:
         //TODO
-        console.log('Axios : 비밀번호가 일치하지 않습니다.');
+        alert('비밀번호가 일치하지 않습니다. 다시 입력해주세요!');
         break;
       case 404:
         //TODO
-        console.log('Axios : 계정이 존재하지 않습니다.');
+        alert(
+          '계정이 존재하지 않습니다. 올바른 정보를 입력했는지 확인해주세요!',
+        );
         break;
       case 412:
         //TODO
@@ -71,15 +76,14 @@ function* requestUserSaga(action) {
 
 // REVIEW
 // NOTE SEGA FUNCTION
-function* loginFailureSaga(action) {
-  console.log('login fail');
-}
+function* loginFailureSaga(action) {}
 
 //REVIEW
 // NOTE SEGA FUNCTION
 function* logoutSaga(action) {
-  yield delay(3000);
-  console.log('로그아웃 성공');
+  yield call(revokeToken);
+  yield call(deleteCookie);
+  console.log('logoutSaga : Logout completed');
 }
 
 function requestUserAxios(email: string, password: string) {
@@ -87,4 +91,28 @@ function requestUserAxios(email: string, password: string) {
     email,
     password,
   });
+}
+
+function revokeToken() {
+  return axios
+    .post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/revoke`, undefined, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('accessToken')}`,
+      },
+    })
+    .then(() => {
+      console.log('revokeToken : delete AccessToken Complete');
+    })
+    .catch((e) => {
+      console.log('revokeToken : delete AccessToken Fail' + e.response.status);
+    });
+}
+
+function deleteCookie() {
+  try {
+    Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
+  } catch (e) {
+    console.log('deleteCookie : Cookies Delete Failed');
+  }
 }

@@ -11,6 +11,7 @@ class WrappedApp extends App<AppInitialProps> {
     console.log('mount');
   }
 
+  // TODO 다른 method 로 바꾸기
   public static getInitialProps = async ({ Component, ctx }: AppContext) => {
     return {
       pageProps: {
