@@ -9,13 +9,15 @@ import {
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
-function requestUserAxios(email: string, password: string) {
-  return axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/signin`, {
-    email,
-    password,
-  });
+// NOTE SEGA OBSERVATION
+export function* userSaga() {
+  yield takeEvery(LOGIN_REQUEST, requestUserSaga);
+  yield takeEvery(LOGIN_FAILURE, loginFailureSaga);
+  yield takeEvery(LOGOUT, logoutSaga);
 }
 
+// REVIEW
+// NOTE SEGA FUNCTION
 function* requestUserSaga(action) {
   try {
     const response = yield call(
@@ -33,26 +35,33 @@ function* requestUserSaga(action) {
           email: string;
         };
       } = jwtDecode(Cookies.get('accessToken'));
-      Cookies.set('email', decoded.user.email);
-      Cookies.set('name', decoded.user.name);
 
+      const splitedName = decoded.user.name.split('#');
       yield put({
         type: LOGIN_SUCCESS,
-        payload: { email: decoded.user.email, name: decoded.user.name },
+        payload: {
+          email: decoded.user.email,
+          userName: splitedName[0],
+          userCode: splitedName[1],
+        },
       });
     }
   } catch (e) {
     switch (e.response.status) {
       case 401:
+        //TODO
         console.log('Axios : 비밀번호가 일치하지 않습니다.');
         break;
       case 404:
+        //TODO
         console.log('Axios : 계정이 존재하지 않습니다.');
         break;
       case 412:
+        //TODO
         console.log('Axios : 데이터가 누락되었습니다');
         break;
       default:
+        //TODO
         console.log('Axios : 알 수 없는 오류가 발생했습니다.');
         break;
     }
@@ -60,17 +69,22 @@ function* requestUserSaga(action) {
   }
 }
 
+// REVIEW
+// NOTE SEGA FUNCTION
 function* loginFailureSaga(action) {
   console.log('login fail');
 }
 
+//REVIEW
+// NOTE SEGA FUNCTION
 function* logoutSaga(action) {
   yield delay(3000);
   console.log('로그아웃 성공');
 }
 
-export function* userSaga() {
-  yield takeEvery(LOGIN_REQUEST, requestUserSaga);
-  yield takeEvery(LOGIN_FAILURE, loginFailureSaga);
-  yield takeEvery(LOGOUT, logoutSaga);
+function requestUserAxios(email: string, password: string) {
+  return axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/signin`, {
+    email,
+    password,
+  });
 }

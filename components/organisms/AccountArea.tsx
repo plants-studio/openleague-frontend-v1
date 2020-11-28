@@ -4,13 +4,22 @@ import { useRouter } from 'next/router';
 import useUser from './../../src/hooks/useUser';
 
 const AccountArea = () => {
-  const { isLogin, email, name, authLogin, authLogout } = useUser();
+  const {
+    isLogin,
+    email,
+    userName,
+    userCode,
+    authLogin,
+    authLogout,
+  } = useUser();
 
   const router = useRouter();
   return (
     <div className={style.areawrapper}>
       {isLogin ? (
-        <span>로그인 성공{name}</span>
+        <span>
+          로그인 성공{userName}, {userCode}
+        </span>
       ) : (
         <>
           <span>로그인해주세요</span>
