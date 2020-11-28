@@ -14,6 +14,7 @@ const bindMiddleware = (middleware?: Middleware[]): StoreEnhancer => {
 };
 
 const makeStore: MakeStore<{}> = () => {
+  console.log('make store');
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
 
