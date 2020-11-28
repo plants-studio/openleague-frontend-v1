@@ -1,9 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from 'plants-ui';
 import GlobalLayout from './../components/templates/GlobalLayout';
 import Counter from './../components/test/Counter';
+import WysiwygEditor from './../components/utility/WysiwygEditor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import 'codemirror/lib/codemirror.css';
 
 export default function CreateLeague() {
+  const [leagueData, setLeagueData] = useState({
+    title: '',
+    introduce: '',
+    rule: '',
+    thumbnail: undefined,
+    game: '',
+    teamMin: 0,
+    teamMax: 0,
+    teamReqMemCnt: 0,
+    placeType: '',
+    discordLink: '',
+    location: '',
+  });
+
+  const handleIntroduce = (e) => {
+    setLeagueData({
+      ...leagueData,
+      introduce: e,
+    });
+  };
+
+  const handleRule = (e) => {
+    setLeagueData({
+      ...leagueData,
+      rule: e,
+    });
+  };
+
+  const handlePlaceType = (e) => {
+    setLeagueData({
+      ...leagueData,
+      placeType: e.target.defaultValue,
+    });
+  };
+
   return (
     <div>
       <GlobalLayout>
@@ -12,6 +50,9 @@ export default function CreateLeague() {
             type="text"
             name="leagueName"
             placeholder="대회 이름을 입력해주세요!"
+            onChange={(e) => {
+              setLeagueData({ ...leagueData, title: e.target.value });
+            }}
           ></input>
           <br />
           <span>신청 마감일</span>
@@ -25,22 +66,38 @@ export default function CreateLeague() {
           <br />
         </Card>
         <Card cardTitle="게임 선택">
-          <select>
-            <option value="League Of Legend">League Of Legend</option>
-            <option value="Overwatch">Overwatch</option>
-            <option value="Valorant">Valorant</option>
-            <option value="Battlegrounds">Battlegrounds</option>
-            <option value="Rainbow Six Siege">Rainbow Six Siege</option>
-            <option value="etc">etc</option>
-          </select>
+          <input
+            type="text"
+            name="game"
+            onChange={(e) => {
+              setLeagueData({ ...leagueData, game: e.target.value });
+            }}
+          ></input>
         </Card>
         <Card cardTitle="대회 방법">
-          <div>
-            <input type="radio" name="onoffline" value="online" />
+          <form>
+            <input
+              type="radio"
+              name="onoffline"
+              value="online"
+              onChange={handlePlaceType}
+            />
             온라인
-            <input type="radio" name="onoffline" value="offline" />
+            <input
+              type="radio"
+              name="onoffline"
+              value="offline"
+              onChange={handlePlaceType}
+            />
             오프라인
-          </div>
+          </form>
+        </Card>
+
+        <Card cardTitle="대회 소개">
+          <WysiwygEditor onChange={handleIntroduce}></WysiwygEditor>
+        </Card>
+        <Card cardTitle="대회 규칙">
+          <WysiwygEditor onChange={handleRule}></WysiwygEditor>
         </Card>
       </GlobalLayout>
     </div>
