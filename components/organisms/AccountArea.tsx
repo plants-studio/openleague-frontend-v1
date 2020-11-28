@@ -4,14 +4,7 @@ import { useRouter } from 'next/router';
 import useUser from './../../src/hooks/useUser';
 
 const AccountArea = () => {
-  const {
-    isLogin,
-    email,
-    userName,
-    userCode,
-    authLogin,
-    authLogout,
-  } = useUser();
+  const { isLogin, email, userName, userCode } = useUser();
 
   const router = useRouter();
   return (
@@ -23,15 +16,15 @@ const AccountArea = () => {
       ) : (
         <>
           <span>로그인해주세요</span>
-          <button
-            onClick={() => {
-              router.push('/signin');
-            }}
-          >
-            로그인 페이지
-          </button>
         </>
       )}
+      <button
+        onClick={() => {
+          router.push('/signin');
+        }}
+      >
+        로그인 페이지
+      </button>
     </div>
   );
 };

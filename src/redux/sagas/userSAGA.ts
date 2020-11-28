@@ -7,6 +7,8 @@ import {
   LOGOUT,
   RELOAD,
   REFRESH_REQUEST,
+  REFRESH_SUCCESS,
+  REFRESH_FAILURE,
 } from '../reducer/userReducer';
 import Cookies from 'js-cookie';
 import { getDecodedData } from '../../utils/decode';
@@ -57,14 +59,13 @@ function* logoutSaga(action) {
   yield call(AauthRevoke, 'accessToken');
   yield call(AauthRevoke, 'refreshToken');
   yield call(deleteAllTokenInCookie);
-  console.log('logoutSaga : Logout completed');
 }
 
 // NOTE SAGA FUNCTION
 function* reloadSaga(action) {
   const refreshToken = yield call(searchRefreshToken);
-  console.log('get it!' + refreshToken);
   if (refreshToken) {
+    console.log('refresh start!');
     yield put({ type: REFRESH_REQUEST });
   }
 }
@@ -77,7 +78,7 @@ function* refreshRequestSaga(action) {
       saveTokensToCookie(response.data.accessToken, response.data.refreshToken);
       const { email, userName, userCode } = getDecodedData();
       yield put({
-        type: LOGIN_SUCCESS,
+        type: REFRESH_SUCCESS,
         payload: {
           email: email,
           userName: userName,
@@ -86,8 +87,7 @@ function* refreshRequestSaga(action) {
       });
     }
   } catch (e) {
-    yield call(asLoginFailed, e);
-    yield put({ type: LOGIN_FAILURE });
+    yield put({ type: REFRESH_FAILURE });
   }
 }
 

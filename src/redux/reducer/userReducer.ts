@@ -85,6 +85,8 @@ function user(state = initialState, action: UserAction) {
         userName: action.payload.userName,
         userCode: action.payload.userCode,
       };
+    case REFRESH_FAILURE:
+      return state;
     default:
       return state;
   }
