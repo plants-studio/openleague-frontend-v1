@@ -1,11 +1,11 @@
-import { Button, Icon, NavButton } from 'plants-ui';
+import { Button, Card, Icon, NavButton } from 'plants-ui';
+import React from 'react';
 import GlobalLayout from './../components/templates/GlobalLayout';
-import Counter from './../components/test/Counter';
 
 const Test = () => {
   return (
     <GlobalLayout>
-      <Counter />
+      <Card cardTitle="인풋">ㄴㄴ</Card>
     </GlobalLayout>
   );
 };

@@ -11,9 +11,9 @@ const DividerLine = ({ margin }: IProps) => {
 const linestyle = (margin) => {
   const text = {
     color: '#E8EBF3',
-    opacity: '20%',
+    opacity: '10%',
     width: '100%',
-    height: '1px',
+    borderWidth: '2px',
     margin: `${margin} 0`,
   };
   return text;
