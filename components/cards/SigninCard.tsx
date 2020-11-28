@@ -47,6 +47,14 @@ const SigninCard = () => {
       >
         로그인
       </button>
+      <button
+        type="button"
+        onClick={() => {
+          authLogout();
+        }}
+      >
+        로그아웃
+      </button>
     </Card>
   );
 };

@@ -10,7 +10,7 @@ export const login = (diff: DefaultLoginProps) => ({
   payload: diff,
 });
 export const logout = () => ({ type: LOGOUT });
-export const loginSuccess = (diff: DefaultLoginProps) => ({
+export const loginSuccess = (diff: { email: string; name: string }) => ({
   type: LOGIN_SUCCESS,
   payload: diff,
 });
@@ -30,8 +30,8 @@ type UserState = {
 
 const initialState: UserState = {
   isLogin: false,
-  email: 'non-login-email',
-  name: 'non-login-name',
+  email: '',
+  name: '',
 };
 
 function user(state = initialState, action: UserAction) {
@@ -42,7 +42,7 @@ function user(state = initialState, action: UserAction) {
       return {
         isLogin: true,
         email: action.payload.email,
-        name: action.payload.password,
+        name: action.payload.name,
       };
     case LOGOUT:
       return { isLogin: false, email: '', name: '' };
