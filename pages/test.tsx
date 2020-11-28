@@ -1,23 +1,12 @@
 import { Button, Icon, NavButton } from 'plants-ui';
-
-const sayHi = () => {
-  console.log('hi');
-};
+import GlobalLayout from './../components/templates/GlobalLayout';
+import Counter from './../components/test/Counter';
 
 const Test = () => {
   return (
-    <div>
-      안녕
-      <br />
-      <Button themeType="primary" onClick={sayHi}>
-        테스트
-      </Button>
-      <NavButton width="200px">
-        <Icon icon="community" />
-        커뮤니티
-      </NavButton>
-      <br />
-    </div>
+    <GlobalLayout>
+      <Counter />
+    </GlobalLayout>
   );
 };
 
