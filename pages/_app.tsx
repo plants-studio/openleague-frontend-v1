@@ -3,39 +3,25 @@ import App, { AppInitialProps, AppContext } from 'next/app';
 import { wrapper } from '../src/redux/store';
 import Head from 'next/head';
 import './../styles/globals.css';
+import type { AppProps } from 'next/app';
+import useUser from './../src/hooks/useUser';
 
-class WrappedApp extends App<AppInitialProps> {
-  componentDidMount() {
-    // 새로고침 시 Redux Store 가 초기화됨
-    // 여기서 쿠키값을 통해 필요한 데이터를 받아와야 함
+function WrappedApp({ Component, pageProps }: AppProps) {
+  const { CReload } = useUser();
+  useEffect(() => {
     console.log('mount');
-  }
+    CReload();
+  }, []);
+  return (
+    <>
+      <Head>
+        <title>오픈리그 | 게이머를 위한 all-in-one 플랫폼</title>
+        <meta property="og:title" content="my project" key="title" />
+      </Head>
 
-  // TODO 다른 method 로 바꾸기
-  public static getInitialProps = async ({ Component, ctx }: AppContext) => {
-    return {
-      pageProps: {
-        ...(Component.getInitialProps
-          ? await Component.getInitialProps(ctx)
-          : {}),
-      },
-      appProp: ctx.pathname,
-    };
-  };
-
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
-      <>
-        <Head>
-          <title>my project</title>
-          <meta property="og:title" content="my project" key="title" />
-        </Head>
-
-        <Component {...pageProps} />
-      </>
-    );
-  }
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default wrapper.withRedux(WrappedApp);

@@ -5,9 +5,11 @@ export const LOGIN_REQUEST = 'user/LOGIN_REQUEST' as const;
 export const LOGOUT = 'user/LOGOUT' as const;
 export const LOGIN_SUCCESS = 'user/LOGIN_SUCCESS' as const;
 export const LOGIN_FAILURE = 'user/LOGIN_FAILURE' as const;
+export const RELOAD = 'user/RELOAD' as const;
+export const REFRESH = 'user/REFRESH' as const;
 
 // NOTE ACTION FUNCTION
-export const login = (diff: DefaultLoginProps) => ({
+export const loginRequest = (diff: DefaultLoginProps) => ({
   type: LOGIN_REQUEST,
   payload: diff,
 });
@@ -21,13 +23,15 @@ export const loginSuccess = (diff: {
   payload: diff,
 });
 export const loginFailure = () => ({ type: LOGIN_FAILURE });
+export const reload = () => ({ type: RELOAD });
 
 // NOTE ACTION TYPE
 type UserAction =
-  | ReturnType<typeof login>
+  | ReturnType<typeof loginRequest>
   | ReturnType<typeof logout>
   | ReturnType<typeof loginSuccess>
-  | ReturnType<typeof loginFailure>;
+  | ReturnType<typeof loginFailure>
+  | ReturnType<typeof reload>;
 
 // NOTE STORE TYPE
 type UserState = {
@@ -57,8 +61,12 @@ function user(state = initialState, action: UserAction) {
         userName: action.payload.userName,
         userCode: action.payload.userCode,
       };
+    case LOGIN_FAILURE:
+      return state;
     case LOGOUT:
       return { isLogin: false, email: '', userName: '', userCode: '' };
+    case RELOAD:
+      return state;
     default:
       return state;
   }

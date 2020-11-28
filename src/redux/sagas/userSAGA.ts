@@ -5,19 +5,21 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
+  RELOAD,
 } from '../reducer/userReducer';
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
-// NOTE SEGA OBSERVATION
+// NOTE SAGA OBSERVATION
 export function* userSaga() {
   yield takeEvery(LOGIN_REQUEST, requestUserSaga);
   yield takeEvery(LOGIN_FAILURE, loginFailureSaga);
   yield takeEvery(LOGOUT, logoutSaga);
+  yield takeEvery(RELOAD, reloadSaga);
 }
 
 // REVIEW
-// NOTE SEGA FUNCTION
+// NOTE SAGA FUNCTION
 function* requestUserSaga(action) {
   try {
     const response = yield call(
@@ -30,7 +32,6 @@ function* requestUserSaga(action) {
       Cookies.set('accessToken', response.data.accessToken, { expires: 7 });
       Cookies.set('refreshToken', response.data.refreshToken, {
         expires: 7,
-        HttpOnly: true,
       });
       const decoded: {
         user: {
@@ -75,15 +76,35 @@ function* requestUserSaga(action) {
 }
 
 // REVIEW
-// NOTE SEGA FUNCTION
+// NOTE SAGA FUNCTION
 function* loginFailureSaga(action) {}
 
 //REVIEW
-// NOTE SEGA FUNCTION
+// NOTE SAGA FUNCTION
 function* logoutSaga(action) {
-  yield call(revokeToken);
+  yield call(revokeToken, 'accessToken');
+  yield call(revokeToken, 'refreshToken');
   yield call(deleteCookie);
   console.log('logoutSaga : Logout completed');
+}
+
+// NOTE SAGA FUNCTION
+function* reloadSaga(action) {
+  const refreshToken = yield call(findRefreshToken);
+  console.log('get it!' + refreshToken);
+  if (refreshToken) {
+    // TODO call dispatch refresh
+  }
+}
+
+function findRefreshToken() {
+  const refreshToken = Cookies.get('refreshToken');
+  if (typeof refreshToken === undefined) {
+    console.log('reloadSaga : no cookies');
+    return null;
+  } else {
+    return refreshToken;
+  }
 }
 
 function requestUserAxios(email: string, password: string) {
@@ -93,18 +114,18 @@ function requestUserAxios(email: string, password: string) {
   });
 }
 
-function revokeToken() {
+function revokeToken(tokenName: string) {
   return axios
     .post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/revoke`, undefined, {
       headers: {
-        Authorization: `Bearer ${Cookies.get('accessToken')}`,
+        Authorization: `Bearer ${Cookies.get(tokenName)}`,
       },
     })
     .then(() => {
-      console.log('revokeToken : delete AccessToken Complete');
+      console.log(`revokeToken : delete ${tokenName} Complete`);
     })
     .catch((e) => {
-      console.log('revokeToken : delete AccessToken Fail' + e.response.status);
+      console.log(`revokeToken : delete ${tokenName} Fail` + e.response.status);
     });
 }
 

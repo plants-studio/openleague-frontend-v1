@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/reducer';
-import { login, logout } from '../redux/reducer/userReducer';
+import { loginRequest, logout, reload } from '../redux/reducer/userReducer';
 import { useCallback } from 'react';
 import { DefaultLoginProps } from '../types/authType';
 
@@ -13,18 +13,20 @@ export default function useCounter() {
   const dispatch = useDispatch();
 
   // NOTE CALLBACK FUNCTION FOR COMPONENTS
-  const authLogin = useCallback(
-    (diff: DefaultLoginProps) => dispatch(login(diff)),
+  const CLoginRequest = useCallback(
+    (diff: DefaultLoginProps) => dispatch(loginRequest(diff)),
     [dispatch],
   );
-  const authLogout = useCallback(() => dispatch(logout()), [dispatch]);
+  const CAuthLogout = useCallback(() => dispatch(logout()), [dispatch]);
+  const CReload = useCallback(() => dispatch(reload()), [dispatch]);
 
   return {
     isLogin,
     email,
     userName,
     userCode,
-    authLogin,
-    authLogout,
+    CLoginRequest,
+    CAuthLogout,
+    CReload,
   };
 }
