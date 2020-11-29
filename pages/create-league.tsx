@@ -9,6 +9,9 @@ import 'codemirror/lib/codemirror.css';
 export default function CreateLeague() {
   const [leagueData, setLeagueData] = useState({
     title: '',
+    applicationDeadline: '',
+    leagueStartDay: '',
+    leagueEndDay: '',
     introduce: '',
     rule: '',
     thumbnail: undefined,
@@ -35,6 +38,11 @@ export default function CreateLeague() {
     });
   };
 
+  const handleDate = (e) => {
+    console.log(e);
+    setLeagueData({ ...leagueData, [e.target.name]: e.target.value });
+  };
+
   const handlePlaceType = (e) => {
     setLeagueData({
       ...leagueData,
@@ -56,13 +64,21 @@ export default function CreateLeague() {
           ></input>
           <br />
           <span>신청 마감일</span>
-          <input type="date" name="applicationDeadline"></input>
+          <input
+            type="date"
+            name="applicationDeadline"
+            onChange={handleDate}
+          ></input>
           <br />
           <span>대회 시작일</span>
-          <input type="date" name="leagueStartDay"></input>
+          <input
+            type="date"
+            name="leagueStartDay"
+            onChange={handleDate}
+          ></input>
           <br />
           <span>대회 마감일</span>
-          <input type="date" name="leagueEndDay"></input>
+          <input type="date" name="leagueEndDay" onChange={handleDate}></input>
           <br />
         </Card>
         <Card cardTitle="게임 선택">

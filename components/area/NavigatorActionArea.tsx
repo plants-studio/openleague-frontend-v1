@@ -22,7 +22,7 @@ const NavigatorActionArea = () => {
         setTargetPath('/create-post');
         break;
       default:
-        console.log('왜이러냐');
+        console.log('그 어떤 url도 아닙니다');
         break;
     }
     setButtonText;
