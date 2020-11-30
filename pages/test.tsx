@@ -1,11 +1,19 @@
-import { Button, Icon, NavButton } from 'plants-ui';
+import { Button, Card, Icon, NavButton } from 'plants-ui';
+import React from 'react';
 import GlobalLayout from './../components/templates/GlobalLayout';
-import Counter from './../components/test/Counter';
+import WysiwygEditor from './../components/utility/WysiwygEditor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import 'codemirror/lib/codemirror.css';
 
 const Test = () => {
+  const introduceInput = (e) => {
+    console.log(e);
+  };
   return (
     <GlobalLayout>
-      <Counter />
+      <Card cardTitle="대회 소개">
+        <WysiwygEditor onChange={introduceInput}></WysiwygEditor>
+      </Card>
     </GlobalLayout>
   );
 };

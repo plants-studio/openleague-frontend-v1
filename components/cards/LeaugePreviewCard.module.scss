@@ -1,0 +1,48 @@
+.contentArea {
+  padding: 1rem;
+}
+
+.iamgeWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.headerArea {
+  padding-bottom: 1rem;
+}
+
+.bottomInfoArea {
+  font-size: 0.875rem;
+
+  &__applicationInfoArea {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__applicant {
+    font-weight: bold;
+  }
+
+  &__applicantMinMax {
+    opacity: 0.3;
+    font-weight: bold;
+  }
+
+  &__deadline {
+    color: rgb(204, 204, 204);
+  }
+}
+
+.progressWrapper {
+  margin-top: 10px;
+}

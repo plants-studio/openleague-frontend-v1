@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './AccountArea.module.scss';
 import { useRouter } from 'next/router';
-import useUser from './../../src/hooks/useUser';
+import useUser from '../../src/hooks/useUser';
 
 const AccountArea = () => {
   const { isLogin, email, userName, userCode } = useUser();
