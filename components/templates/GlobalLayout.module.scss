@@ -26,6 +26,7 @@ $leftnavWidth: 360px;
 }
 
 .bottomnavigator {
+  z-index: 99;
   position: fixed;
   height: 80px;
   bottom: 0;

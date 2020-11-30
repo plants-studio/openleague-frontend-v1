@@ -1,13 +1,14 @@
 import React from 'react';
 import { Card } from 'plants-ui';
+import CardWrapper from '../templates/CardWrapper';
 
 const LeagueSearchToolCard = () => {
   return (
-    <div style={{ width: '100%' }}>
+    <CardWrapper desktopWidth="25rem">
       <Card cardTitle="탐색 도구" width="100%">
         ss
       </Card>
-    </div>
+    </CardWrapper>
   );
 };
 
