@@ -2,7 +2,8 @@ import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
 import GlobalLayout from './../components/templates/GlobalLayout';
 import LeagueListArea from './../components/area/LeagueListArea';
-import { Card } from 'plants-ui';
+import HeroBannerCard from '../components/cards/HeroBannerCard';
+import LeagueSearchToolCard from '../components/cards/LeagueSearchToolCard';
 
 export default function Index() {
   const [accessToken, setAccessToken] = useState(null);
@@ -19,7 +20,10 @@ export default function Index() {
   return (
     <div>
       <GlobalLayout>
-        <h1>대회 목록</h1>
+        <div>
+          <HeroBannerCard />
+          <LeagueSearchToolCard />
+        </div>
         <LeagueListArea />
       </GlobalLayout>
     </div>
