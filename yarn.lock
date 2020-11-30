@@ -3498,10 +3498,10 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-plants-ui@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/plants-ui/-/plants-ui-1.0.8.tgz#b81e919a395b91907dd9c48ba79df51f065a722b"
-  integrity sha512-HEaFY9jgiH40mTol3Wh8HnpyZrq43OGrrFdUQaGaCHLFFErf5b33Fe4/HQK4Q1Nw1Yh+6Zw7L5IbfjjigyM3/g==
+plants-ui@^1.0.9:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/plants-ui/-/plants-ui-1.0.10.tgz#f959dc9f90e4c6c3e3eb7151377732496c461d80"
+  integrity sha512-XvbqYEdn3mEibFmAP1oeofpJNUTSdiz832UyYXr2gDQMarel1GU857A6nf05IftpVQtJN/PeB/Zy64GE4rnsJQ==
 
 platform@1.3.3:
   version "1.3.3"
