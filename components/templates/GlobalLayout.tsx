@@ -34,7 +34,7 @@ const Child = ({ children }: IProps) => {
       setWidth(window.innerWidth);
     }
     window.addEventListener('resize', handleResize);
-    setWidth(window.innerWidth);
+    setWidth(window.screen.availWidth);
   });
 
   return (

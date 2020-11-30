@@ -4,6 +4,7 @@ import GlobalLayout from './../components/templates/GlobalLayout';
 import LeagueListArea from './../components/area/LeagueListArea';
 import HeroBannerCard from '../components/cards/HeroBannerCard';
 import LeagueSearchToolCard from '../components/cards/LeagueSearchToolCard';
+import CardRowLayout from '../components/templates/CardRowLayout';
 
 export default function Index() {
   const [accessToken, setAccessToken] = useState(null);
@@ -20,10 +21,10 @@ export default function Index() {
   return (
     <div>
       <GlobalLayout>
-        <div>
+        <CardRowLayout>
           <HeroBannerCard />
           <LeagueSearchToolCard />
-        </div>
+        </CardRowLayout>
         <LeagueListArea />
       </GlobalLayout>
     </div>
