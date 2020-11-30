@@ -91,7 +91,7 @@ function* refreshRequestSaga(action) {
   }
 }
 
-// TODO alert 메소드를 UI로 제대로 구현하기
+// TODO alert 메소드를 UI로 제대로 구현하기(모달로)
 const asLoginFailed = (e) => {
   switch (e.response.status) {
     case 401:
