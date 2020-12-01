@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Card } from 'plants-ui';
-import GlobalLayout from './../components/templates/GlobalLayout';
-import Counter from './../components/test/Counter';
-import WysiwygEditor from './../components/utility/WysiwygEditor';
+import GlobalLayout from '../../components/templates/GlobalLayout';
+import Counter from '../../components/test/Counter';
+import WysiwygEditor from '../../components/utility/WysiwygEditor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import 'codemirror/lib/codemirror.css';
-import useCreateLeague from '../src/hooks/useCreateLeague';
+import useCreateLeague from '../../src/hooks/useCreateLeague';
+import TextInput from './../../components/atoms/TextInput';
 
 export default function CreateLeague() {
   const { CCreateRequest } = useCreateLeague();
@@ -70,6 +71,10 @@ export default function CreateLeague() {
     <div>
       <GlobalLayout>
         <Card cardTitle="대회 개설">
+          <TextInput
+            type="text"
+            placeholder="대회 이름을 입력해주세요!"
+          ></TextInput>
           <input
             type="text"
             name="leagueName"

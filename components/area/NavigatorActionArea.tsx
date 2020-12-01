@@ -8,16 +8,20 @@ const NavigatorActionArea = () => {
   const [buttonText, setButtonText] = useState('');
   const [targetPath, setTargetPath] = useState('');
   useEffect(() => {
-    switch (router.pathname) {
-      case '/':
+    switch (router.pathname.split('/')[1]) {
+      case '':
         setButtonText('대회 생성');
-        setTargetPath('/create-league');
+        setTargetPath('/openleague/create-league');
         break;
-      case '/home':
+      case 'openleague':
+        setButtonText('대회 생성');
+        setTargetPath('/openleague/create-league');
+        break;
+      case 'home':
         setButtonText('없는 기능');
         setTargetPath('/404');
         break;
-      case '/community':
+      case 'community':
         setButtonText('글 작성하기');
         setTargetPath('/create-post');
         break;

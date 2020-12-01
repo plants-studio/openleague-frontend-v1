@@ -19,7 +19,7 @@ const GlobalLayout = ({ children }: IProps) => {
   }, []);
 
   if (!showChild) {
-    // You can show some kind of placeholder UI here
+    // TODO 로딩중이라는 글로벌 플레이스홀더 만들기
     return <span>로딩중입니다</span>;
   }
 
