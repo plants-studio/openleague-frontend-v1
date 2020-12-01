@@ -7,4 +7,17 @@
   border: none;
   border-radius: 5px;
   color: #333;
+  border: 2px solid transparent;
+
+  &:hover {
+    background-color: #e6e6e6;
+    transition: background-color 100ms ease-out;
+  }
+
+  &:focus {
+    background-color: white;
+    border: 2px solid black;
+    transition: 300ms ease-out;
+    font-weight: 600;
+  }
 }

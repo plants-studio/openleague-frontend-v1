@@ -70,19 +70,16 @@ export default function CreateLeague() {
   return (
     <div>
       <GlobalLayout>
-        <Card cardTitle="대회 개설">
+        <Card width="400px" cardTitle="대회 개설">
           <TextInput
+            name="title"
             type="text"
-            placeholder="대회 이름을 입력해주세요!"
-          ></TextInput>
-          <input
-            type="text"
-            name="leagueName"
             placeholder="대회 이름을 입력해주세요!"
             onChange={(e) => {
-              setLeagueData({ ...leagueData, title: e.target.value });
+              handleText(e);
             }}
-          ></input>
+            width="100%"
+          ></TextInput>
           <br />
           <span>신청 마감일</span>
           <input
