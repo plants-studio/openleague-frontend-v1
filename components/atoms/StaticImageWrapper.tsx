@@ -7,6 +7,7 @@ interface IProps {
   width?: string;
   height?: string;
   borderRadius?: string;
+  imagePath: string;
 }
 
 const StaticImageWrapper = ({
@@ -15,6 +16,7 @@ const StaticImageWrapper = ({
   width,
   height,
   borderRadius,
+  imagePath,
 }: IProps) => {
   return (
     <div
@@ -27,7 +29,7 @@ const StaticImageWrapper = ({
       }}
     >
       <Image
-        src="/image/game-leagueoflegend.jpg"
+        src={imagePath}
         width={OptWidth}
         height={OptHeight}
         layout="responsive"
