@@ -7,9 +7,17 @@ interface IProps {
   placeholder?: string;
   onChange?: (e) => void;
   width?: string;
+  maxLength?: number;
 }
 
-const TextInput = ({ type, placeholder, name, onChange, width }: IProps) => {
+const TextInput = ({
+  type,
+  placeholder,
+  name,
+  onChange,
+  width,
+  maxLength,
+}: IProps) => {
   return (
     <input
       name={name}
@@ -18,6 +26,7 @@ const TextInput = ({ type, placeholder, name, onChange, width }: IProps) => {
       placeholder={placeholder}
       style={{ width: width }}
       onChange={onChange}
+      maxLength={maxLength}
     ></input>
   );
 };
