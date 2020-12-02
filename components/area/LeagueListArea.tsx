@@ -26,13 +26,17 @@ const LeagueListArea = ({ leagueList }: IProps) => {
         /> */}
         {leagueList.map((league) => (
           <LeaguePreviewCard
-            game={league.game}
+            game={league.game.toUpperCase()}
             title={league.title}
             placeType={league.placeType}
             teamReqMemCnt={league.teamReqMemCnt}
             leagueSchedule={league.leagueStartDay}
-            applicationDeadline={league.applicationDeadline}
-            percentage={30}
+            applicationDeadline={getDeadline(league.applicationDeadline)}
+            percentage={getPercentage(
+              league.applicant,
+              league.teamReqMemCnt,
+              league.teamMin,
+            )}
             applicant={league.applicant}
             applicantMinMax={league.teamMin}
             color={'#0CA76A'}
@@ -41,6 +45,36 @@ const LeagueListArea = ({ leagueList }: IProps) => {
       </div>
     </>
   );
+};
+
+const getPercentage = (
+  applicant: number,
+  teamReqMemCnt: number,
+  teamMin: number,
+) => {
+  return (applicant / (teamReqMemCnt * teamMin)) * 100;
+};
+
+const getDeadline = (applicationDeadline: number) => {
+  var diffDate_1 = new Date(applicationDeadline);
+  var diffDate_2 = new Date();
+
+  diffDate_1 = new Date(
+    diffDate_1.getFullYear(),
+    diffDate_1.getMonth() + 1,
+    diffDate_1.getDate(),
+  );
+  diffDate_2 = new Date(
+    diffDate_2.getFullYear(),
+    diffDate_2.getMonth() + 1,
+    diffDate_2.getDate(),
+  );
+
+  var diff = diffDate_1.getTime() - diffDate_2.getTime();
+  diff = Math.ceil(diff / (1000 * 3600 * 24));
+
+  console.log(diff);
+  return diff;
 };
 
 export default LeagueListArea;
