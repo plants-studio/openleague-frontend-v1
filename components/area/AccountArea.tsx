@@ -35,9 +35,7 @@ const AccountArea = () => {
                   OptHeight={100}
                   borderRadius="1.5rem"
                   width="6rem"
-                  imagePath={
-                    'https://open-league-back.herokuapp.com/images/thumbnails/default.webp'
-                  }
+                  imagePath={`${process.env.NEXT_PUBLIC_BACKEND}${userProfileImage}`}
                 />
                 <div className={style.profile__textarea}>
                   <span className={style.profile__username}>{userName}</span>
@@ -48,14 +46,28 @@ const AccountArea = () => {
             </div>
           ) : (
             <>
-              <StaticImageWrapper
-                OptWidth={1071}
-                OptHeight={443}
-                width="100%"
-                imagePath="/images/logo.png"
-              />
+              <div
+                onClick={() => {
+                  router.push('/');
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <StaticImageWrapper
+                  OptWidth={1071}
+                  OptHeight={443}
+                  width="100%"
+                  imagePath="/images/logo.png"
+                />
+              </div>
               <div className={style.actionbar}>
-                <span className={style.actionbar__text}>로그인</span>
+                <span
+                  className={style.actionbar__text}
+                  onClick={() => {
+                    router.push('/signin');
+                  }}
+                >
+                  로그인
+                </span>
                 <div className={style.dividebar}></div>
                 <span className={style.actionbar__text}>회원가입</span>
                 <div className={style.dividebar}></div>
