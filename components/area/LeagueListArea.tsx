@@ -42,6 +42,126 @@ const LeagueListArea = ({ leagueList }) => {
         applicantMinMax="80명 이상 100명 이하"
         color="#5F5F5F"
       />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
+      <LeaguePreviewCard
+        game="LEAGUE OF LEGEND"
+        title="이건 대회이름입니다"
+        placeType="오프라인"
+        teamReqMemCnt={5}
+        leagueSchedule="11월 20일"
+        applicationDeadline={3}
+        percentage={50}
+        applicant={35}
+        applicantMinMax="80명 이상 100명 이하"
+        color="#5F5F5F"
+      />
     </div>
   );
 };
