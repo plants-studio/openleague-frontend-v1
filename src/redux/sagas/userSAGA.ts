@@ -5,10 +5,11 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-  RELOAD,
+  RELOAD_REQUEST,
   REFRESH_REQUEST,
   REFRESH_SUCCESS,
   REFRESH_FAILURE,
+  RELOAD_FAILURE,
 } from '../reducer/userReducer';
 import Cookies from 'js-cookie';
 import { getDecodedAccessTokenData } from '../../utils/decode';
@@ -22,7 +23,7 @@ import {
 export function* userSaga() {
   yield takeEvery(LOGIN_REQUEST, loginRequestSaga);
   yield takeEvery(LOGOUT, logoutSaga);
-  yield takeEvery(RELOAD, reloadSaga);
+  yield takeEvery(RELOAD_REQUEST, reloadSaga);
   yield takeEvery(REFRESH_REQUEST, refreshRequestSaga);
 }
 
@@ -73,6 +74,8 @@ function* reloadSaga(action) {
   if (refreshToken) {
     console.log('refresh start!');
     yield put({ type: REFRESH_REQUEST });
+  } else {
+    yield put({ type: RELOAD_FAILURE });
   }
 }
 

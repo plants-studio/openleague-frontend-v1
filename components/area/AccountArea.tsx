@@ -5,44 +5,78 @@ import useUser from '../../src/hooks/useUser';
 import { IconButton } from 'plants-ui';
 import StaticImageWrapper from '../atoms/StaticImageWrapper';
 
-// TODO 로그인/로그아웃 되는 컴포넌트 만들기
 const AccountArea = () => {
-  const { isLogin, email, userName, userCode, userProfileImage } = useUser();
+  const {
+    isLogin,
+    isLoadDone,
+    userName,
+    userCode,
+    userProfileImage,
+    CAuthLogout,
+  } = useUser();
 
   const router = useRouter();
   return (
     <div className={style.areawrapper}>
-      {isLogin ? (
-        <div className={style.loginedwrapper}>
-          <div>
-            <IconButton icon="Home" size="4rem" />
-          </div>
-          <div>
-            <StaticImageWrapper
-              OptWidth={100}
-              OptHeight={100}
-              borderRadius="100px"
-              imagePath={
-                'https://open-league-back.herokuapp.com/images/thumbnails/default.webp'
-              }
-            />
-            로그인 성공{userName}, {userCode}
-          </div>
-          <div>
-            <IconButton icon="Home" size="4rem" />
-          </div>
-        </div>
-      ) : (
+      {isLoadDone ? (
         <>
-          <span>로그인해주세요</span>
-          <button
-            onClick={() => {
-              router.push('/signin');
-            }}
-          >
-            로그인 페이지
-          </button>
+          {isLogin ? (
+            <div className={style.loginedwrapper}>
+              <IconButton
+                icon="powerOffSolid"
+                size="3.5rem"
+                onClick={() => {
+                  CAuthLogout();
+                }}
+              />
+              <div className={style.profile}>
+                <StaticImageWrapper
+                  OptWidth={100}
+                  OptHeight={100}
+                  borderRadius="1.5rem"
+                  width="6rem"
+                  imagePath={
+                    'https://open-league-back.herokuapp.com/images/thumbnails/default.webp'
+                  }
+                />
+                <div className={style.profile__textarea}>
+                  <span className={style.profile__username}>{userName}</span>
+                  <span className={style.profile__usercode}>#{userCode}</span>
+                </div>
+              </div>
+              <IconButton icon="cogSolid" size="3.5rem" />
+            </div>
+          ) : (
+            <>
+              <StaticImageWrapper
+                OptWidth={1071}
+                OptHeight={443}
+                width="100%"
+                imagePath="/images/logo.png"
+              />
+              <div className={style.actionbar}>
+                <span className={style.actionbar__text}>로그인</span>
+                <div className={style.dividebar}></div>
+                <span className={style.actionbar__text}>회원가입</span>
+                <div className={style.dividebar}></div>
+                <div className={style.actionbar__discord}>
+                  디스코드로 시작하기
+                </div>
+              </div>
+              {/*
+              <button
+                onClick={() => {
+                  router.push('/signin');
+                }}
+              >
+                로그인 페이지
+              </button>*/}
+            </>
+          )}
         </>
+      ) : (
+        // TODO 여기에도 넣을 로딩중 애니메이션 만들기
+        <div>로딩중입니다</div>
       )}
     </div>
   );
