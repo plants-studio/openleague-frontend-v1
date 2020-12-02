@@ -20,6 +20,7 @@ export const loginSuccess = (diff: {
   email: string;
   userName: string;
   userCode: string;
+  userProfileImage: string;
 }) => ({ type: LOGIN_SUCCESS, payload: diff });
 export const loginFailure = () => ({ type: LOGIN_FAILURE });
 export const reload = () => ({ type: RELOAD });
@@ -28,6 +29,7 @@ export const refreshSuccess = (diff: {
   email: string;
   userName: string;
   userCode: string;
+  userProfileImage: string;
 }) => ({ type: REFRESH_SUCCESS, payload: diff });
 export const refreshFailure = () => ({ type: REFRESH_FAILURE });
 
@@ -48,6 +50,7 @@ type UserState = {
   email: string;
   userName: string;
   userCode: string;
+  userProfileImage: string;
 };
 
 // NOTE STORE INITIALIZE
@@ -56,6 +59,7 @@ const initialState: UserState = {
   email: '',
   userName: '',
   userCode: '',
+  userProfileImage: '',
 };
 
 // NOTE REDUCER
@@ -69,11 +73,18 @@ function user(state = initialState, action: UserAction) {
         email: action.payload.email,
         userName: action.payload.userName,
         userCode: action.payload.userCode,
+        userProfileImage: action.payload.userProfileImage,
       };
     case LOGIN_FAILURE:
       return state;
     case LOGOUT:
-      return { isLogin: false, email: '', userName: '', userCode: '' };
+      return {
+        isLogin: false,
+        email: '',
+        userName: '',
+        userCode: '',
+        userProfileImage: '',
+      };
     case RELOAD:
       return state;
     case REFRESH_REQUEST:
@@ -84,6 +95,7 @@ function user(state = initialState, action: UserAction) {
         email: action.payload.email,
         userName: action.payload.userName,
         userCode: action.payload.userCode,
+        userProfileImage: action.payload.userProfileImage,
       };
     case REFRESH_FAILURE:
       return state;

@@ -11,7 +11,7 @@ import {
   REFRESH_FAILURE,
 } from '../reducer/userReducer';
 import Cookies from 'js-cookie';
-import { getDecodedData } from '../../utils/decode';
+import { getDecodedAccessTokenData } from '../../utils/decode';
 import {
   saveTokensToCookie,
   searchRefreshToken,
@@ -37,13 +37,19 @@ function* loginRequestSaga(action) {
     );
     if (response.status === 200) {
       saveTokensToCookie(response.data.accessToken, response.data.refreshToken);
-      const { email, userName, userCode } = getDecodedData();
+      const {
+        email,
+        userName,
+        userCode,
+        userProfileImage,
+      } = getDecodedAccessTokenData();
       yield put({
         type: LOGIN_SUCCESS,
         payload: {
           email: email,
           userName: userName,
           userCode: userCode,
+          userProfileImage: userProfileImage,
         },
       });
     }
@@ -76,13 +82,19 @@ function* refreshRequestSaga(action) {
     const response = yield call(AauthRefresh);
     if (response.status === 200) {
       saveTokensToCookie(response.data.accessToken, response.data.refreshToken);
-      const { email, userName, userCode } = getDecodedData();
+      const {
+        email,
+        userName,
+        userCode,
+        userProfileImage,
+      } = getDecodedAccessTokenData();
       yield put({
         type: REFRESH_SUCCESS,
         payload: {
           email: email,
           userName: userName,
           userCode: userCode,
+          userProfileImage: userProfileImage,
         },
       });
     }

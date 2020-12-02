@@ -4,12 +4,15 @@ import { loginRequest, logout, reload } from '../redux/reducer/userReducer';
 import { useCallback } from 'react';
 import { DefaultLoginProps } from '../types/authType';
 
-export default function useCounter() {
+export default function useUser() {
   // NOTE STORE SELECTOR & DISPATCH
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
   const email = useSelector((state: RootState) => state.user.email);
   const userName = useSelector((state: RootState) => state.user.userName);
   const userCode = useSelector((state: RootState) => state.user.userCode);
+  const userProfileImage = useSelector(
+    (state: RootState) => state.user.userProfileImage,
+  );
   const dispatch = useDispatch();
 
   // NOTE CALLBACK FUNCTION FOR COMPONENTS
@@ -25,6 +28,7 @@ export default function useCounter() {
     email,
     userName,
     userCode,
+    userProfileImage,
     CLoginRequest,
     CAuthLogout,
     CReload,
