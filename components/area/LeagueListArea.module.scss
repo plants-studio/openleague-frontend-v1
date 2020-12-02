@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  gap: 16px 16px;
+  gap: 1rem 1rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 
   @media screen and (max-width: 450px) {

@@ -69,20 +69,19 @@ const AccountArea = () => {
                   로그인
                 </span>
                 <div className={style.dividebar}></div>
-                <span className={style.actionbar__text}>회원가입</span>
+                <span
+                  className={style.actionbar__text}
+                  onClick={() => {
+                    router.push('/signup');
+                  }}
+                >
+                  회원가입
+                </span>
                 <div className={style.dividebar}></div>
                 <div className={style.actionbar__discord}>
                   디스코드로 시작하기
                 </div>
               </div>
-              {/*
-              <button
-                onClick={() => {
-                  router.push('/signin');
-                }}
-              >
-                로그인 페이지
-              </button>*/}
             </>
           )}
         </>

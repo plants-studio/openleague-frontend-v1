@@ -6,12 +6,14 @@ import HeroBannerCard from '../components/cards/HeroBannerCard';
 import LeagueSearchToolCard from '../components/cards/LeagueSearchToolCard';
 import CardRowLayout from '../components/templates/CardRowLayout';
 import GameSelectorCard from '../components/cards/GameSelectorCard';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import axios from 'axios';
 import { resolve } from 'path';
 
 // TODO getStaticProps로 1초마다 서버에서 데이터 받아온다음 넘기기
-export default function Index({ leagueList, test }) {
+export default function Index({
+  leagueList,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [accessToken, setAccessToken] = useState(null);
 
   const [UserName, setUserName] = useState('');
@@ -22,7 +24,6 @@ export default function Index({ leagueList, test }) {
       setAccessToken(Cookies.get('accessToken'));
     }
     console.log(leagueList);
-    console.log(test);
   }, []);
 
   return (
@@ -54,7 +55,7 @@ const getLeagueList = async () => {
 };
 
 export async function getStaticProps() {
-  const test = await axios
+  const leagueList = await axios
     .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`, {
       params: {
         page: 1,
@@ -66,8 +67,8 @@ export async function getStaticProps() {
     });
   return {
     props: {
-      test,
+      leagueList,
     },
-    revalidate: 1,
+    //revalidate: 1,
   };
 }
