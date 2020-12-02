@@ -8,6 +8,7 @@ interface IProps {
   onChange?: (e) => void;
   width?: string;
   maxLength?: number;
+  margin?: string;
 }
 
 const TextInput = ({
@@ -17,6 +18,7 @@ const TextInput = ({
   onChange,
   width,
   maxLength,
+  margin,
 }: IProps) => {
   return (
     <input
@@ -24,7 +26,7 @@ const TextInput = ({
       className={style.input}
       type={type}
       placeholder={placeholder}
-      style={{ width: width }}
+      style={{ width: width, margin: margin }}
       onChange={onChange}
       maxLength={maxLength}
     ></input>

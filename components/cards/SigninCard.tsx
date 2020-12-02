@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { Card } from 'plants-ui';
+import React, { useEffect, useState } from 'react';
+import { Card, Button } from 'plants-ui';
 import useUser from './../../src/hooks/useUser';
 import TextInput from '../atoms/TextInput';
+import { useRouter } from 'next/router';
+import StaticImageWrapper from '../atoms/StaticImageWrapper';
+import style from './SigninCard.module.scss';
 
 const SigninCard = () => {
+  const router = useRouter();
   const { isLogin, email, userName, CLoginRequest, CAuthLogout } = useUser();
 
   const [account, setAccount] = useState({
@@ -18,15 +22,25 @@ const SigninCard = () => {
     });
   };
 
+  useEffect(() => {
+    if (isLogin) {
+      router.push('/');
+    }
+  }, [isLogin]);
+
+  useEffect(() => {
+    router.prefetch('/');
+  }, []);
+
   return (
-    <Card cardTitle="로그인" width="25rem">
+    <Card width="25rem">
       <div>
-        {isLogin ? <span>환영합니다!</span> : <span>로그인 안됨</span>}
-        <br />
-        <span>
-          이메일 : {email} | 이름 : {userName}
-        </span>
-        <br />
+        <StaticImageWrapper
+          OptWidth={1071}
+          OptHeight={443}
+          width="100%"
+          imagePath="/images/logo.png"
+        />
         <TextInput
           type="text"
           name="email"
@@ -40,25 +54,28 @@ const SigninCard = () => {
           name="password"
           placeholder="비밀번호"
           width="100%"
+          margin="0.5rem 0 0 0"
           onChange={inputAccount}
         />
         <br />
-        <button
-          type="button"
-          onClick={() => {
-            CLoginRequest(account);
-          }}
-        >
-          로그인
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            CAuthLogout();
-          }}
-        >
-          로그아웃
-        </button>
+        <div className={style.buttonarea}>
+          <Button
+            themeType="primary"
+            onClick={() => {
+              CLoginRequest(account);
+            }}
+          >
+            로그인
+          </Button>
+          <Button
+            themeType="secondary"
+            onClick={() => {
+              //TODO 회원가입 구현
+            }}
+          >
+            회원가입
+          </Button>
+        </div>
       </div>
     </Card>
   );
