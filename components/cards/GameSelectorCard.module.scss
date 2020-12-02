@@ -1,2 +1,17 @@
-.SwipeWrapper {
+.areadivider {
+  width: 12.5%;
+  padding: 0 4px;
+}
+
+.swipearea {
+  position: relative;
+}
+
+.gamewrapper {
+  opacity: 30%;
+  color: black;
+
+  &:hover {
+    opacity: 1;
+  }
 }

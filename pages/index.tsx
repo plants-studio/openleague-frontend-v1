@@ -7,6 +7,7 @@ import LeagueSearchToolCard from '../components/cards/LeagueSearchToolCard';
 import CardRowLayout from '../components/templates/CardRowLayout';
 import GameSelectorCard from '../components/cards/GameSelectorCard';
 
+// TODO getStaticProps로 1초마다 서버에서 데이터 받아온다음 넘기기
 export default function Index() {
   const [accessToken, setAccessToken] = useState(null);
 

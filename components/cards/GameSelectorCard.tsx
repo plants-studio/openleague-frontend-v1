@@ -47,45 +47,46 @@ const GameSelectorCard = () => {
   return (
     <CardWrapper margin="1rem 0">
       <Card cardTitle="게임별 대회 보기">
-        <button
-          onClick={() => {
-            imageSwipe('left');
-          }}
-          style={{ position: 'absolute', top: '50%', zIndex: 99 }}
-        >
-          왼쪽
-        </button>
-        <button
-          onClick={() => {
-            imageSwipe('right');
-          }}
-        >
-          오른쪽
-        </button>
-        <SwipeContentWrapper>
-          <div
-            style={{
-              width: '200%',
-              display: 'flex',
-              marginLeft: `${margin}%`,
-              transition: '300ms ease-out',
-              position: 'relative',
+        <div className={style.swipearea}>
+          <SliderButton
+            direction="left"
+            onClick={() => {
+              imageSwipe('left');
             }}
-          >
-            {gameList.map((game) => (
-              <div style={{ width: '12.5%' }} key={game.id}>
-                <StaticImageWrapper
-                  OptWidth={1201}
-                  OptHeight={432}
-                  borderRadius="5px"
-                  width="100%"
-                  height="1"
-                  imagePath={game.imagePath}
-                />
-              </div>
-            ))}
-          </div>
-        </SwipeContentWrapper>
+          />
+          <SliderButton
+            direction="right"
+            onClick={() => {
+              imageSwipe('right');
+            }}
+          />
+          <SwipeContentWrapper>
+            <div
+              style={{
+                width: '200%',
+                display: 'flex',
+                marginLeft: `${margin}%`,
+                transition: '300ms ease-out',
+                position: 'relative',
+              }}
+            >
+              {gameList.map((game) => (
+                <div className={style.areadivider} key={game.id}>
+                  <div>
+                    <StaticImageWrapper
+                      OptWidth={1201}
+                      OptHeight={432}
+                      borderRadius="5px"
+                      width="100%"
+                      height="1"
+                      imagePath={game.imagePath}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SwipeContentWrapper>
+        </div>
       </Card>
     </CardWrapper>
   );

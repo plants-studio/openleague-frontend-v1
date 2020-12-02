@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import style from './StaticImageWrapper.module.scss';
 
 interface IProps {
   OptWidth: number;
@@ -20,12 +21,11 @@ const StaticImageWrapper = ({
 }: IProps) => {
   return (
     <div
+      className={style.imageWrapper}
       style={{
-        display: 'block',
         width: width,
         height: height,
         borderRadius: borderRadius,
-        overflow: 'hidden',
       }}
     >
       <Image

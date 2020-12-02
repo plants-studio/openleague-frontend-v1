@@ -1,5 +1,9 @@
 .areawrapper {
-  background-color: orange;
   width: 100%;
   height: 200px;
+}
+
+.loginedwrapper {
+  display: flex;
+  flex-direction: row;
 }
