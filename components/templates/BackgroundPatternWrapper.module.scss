@@ -1,0 +1,13 @@
+.defaultstyle {
+  min-height: 100vh;
+  background-image: url('/images/background-pattern.svg');
+  background-repeat: repeat;
+  background-size: 1100px;
+  background-position: center;
+}
+
+.fullscreenmode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

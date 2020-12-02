@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from 'plants-ui';
 import useUser from './../../src/hooks/useUser';
+import TextInput from '../atoms/TextInput';
 
 const SigninCard = () => {
   const { isLogin, email, userName, CLoginRequest, CAuthLogout } = useUser();
@@ -18,7 +19,7 @@ const SigninCard = () => {
   };
 
   return (
-    <Card cardTitle="로그인">
+    <Card cardTitle="로그인" width="25rem">
       <div>
         {isLogin ? <span>환영합니다!</span> : <span>로그인 안됨</span>}
         <br />
@@ -26,17 +27,19 @@ const SigninCard = () => {
           이메일 : {email} | 이름 : {userName}
         </span>
         <br />
-        <input
+        <TextInput
           type="text"
           name="email"
           placeholder="이메일"
+          width="100%"
           onChange={inputAccount}
-        ></input>
+        ></TextInput>
         <br />
-        <input
+        <TextInput
           type="password"
           name="password"
           placeholder="비밀번호"
+          width="100%"
           onChange={inputAccount}
         />
         <br />

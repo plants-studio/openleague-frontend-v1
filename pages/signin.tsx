@@ -1,12 +1,11 @@
 import GlobalLayout from '../components/templates/GlobalLayout';
 import SigninCard from '../components/cards/SigninCard';
+import FullPageWrapper from '../components/templates/BackgroundPatternWrapper';
 
 export default function Login() {
   return (
-    <div>
-      <GlobalLayout>
-        <SigninCard />
-      </GlobalLayout>
-    </div>
+    <FullPageWrapper isFullScreenMode={true}>
+      <SigninCard />
+    </FullPageWrapper>
   );
 }
