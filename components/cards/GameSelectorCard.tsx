@@ -72,7 +72,7 @@ const GameSelectorCard = () => {
             >
               {gameList.map((game) => (
                 <div className={style.areadivider} key={game.id}>
-                  <div>
+                  <div className={style.gamewrapper}>
                     <StaticImageWrapper
                       OptWidth={1201}
                       OptHeight={432}

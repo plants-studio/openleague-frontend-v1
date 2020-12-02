@@ -6,9 +6,12 @@ import HeroBannerCard from '../components/cards/HeroBannerCard';
 import LeagueSearchToolCard from '../components/cards/LeagueSearchToolCard';
 import CardRowLayout from '../components/templates/CardRowLayout';
 import GameSelectorCard from '../components/cards/GameSelectorCard';
+import { GetStaticProps } from 'next';
+import axios from 'axios';
+import { resolve } from 'path';
 
 // TODO getStaticProps로 1초마다 서버에서 데이터 받아온다음 넘기기
-export default function Index() {
+export default function Index({ leagueList, test }) {
   const [accessToken, setAccessToken] = useState(null);
 
   const [UserName, setUserName] = useState('');
@@ -18,6 +21,8 @@ export default function Index() {
       setUserName(Cookies.get('name'));
       setAccessToken(Cookies.get('accessToken'));
     }
+    console.log(leagueList);
+    console.log(test);
   }, []);
 
   return (
@@ -28,8 +33,41 @@ export default function Index() {
           <LeagueSearchToolCard />
         </CardRowLayout>
         <GameSelectorCard />
-        <LeagueListArea />
+        <LeagueListArea leagueList={leagueList} />
+        <button
+          onClick={() => {
+            console.log(getLeagueList());
+          }}
+        >
+          테스트
+        </button>
       </GlobalLayout>
     </div>
   );
+}
+
+const getLeagueList = async () => {
+  try {
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export async function getStaticProps() {
+  const test = await axios
+    .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`, {
+      params: {
+        page: 1,
+        limit: 12,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    props: {
+      test,
+    },
+    revalidate: 1,
+  };
 }

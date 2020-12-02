@@ -8,10 +8,12 @@
 }
 
 .gamewrapper {
-  opacity: 30%;
+  opacity: 45%;
   color: black;
 
   &:hover {
+    transition: opacity 300ms;
     opacity: 1;
+    cursor: pointer;
   }
 }
