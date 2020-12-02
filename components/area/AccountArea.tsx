@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './AccountArea.module.scss';
 import { useRouter } from 'next/router';
 import useUser from '../../src/hooks/useUser';
@@ -14,6 +14,12 @@ const AccountArea = () => {
     userProfileImage,
     CAuthLogout,
   } = useUser();
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.push('/');
+    }
+  }, [isLogin]);
 
   const router = useRouter();
   return (

@@ -8,7 +8,14 @@ import style from './SigninCard.module.scss';
 
 const SigninCard = () => {
   const router = useRouter();
-  const { isLogin, email, userName, CLoginRequest, CAuthLogout } = useUser();
+  const {
+    isLogin,
+    isLoadDone,
+    email,
+    userName,
+    CLoginRequest,
+    CAuthLogout,
+  } = useUser();
 
   const [account, setAccount] = useState({
     email: '',
