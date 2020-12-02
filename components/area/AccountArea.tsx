@@ -63,7 +63,7 @@ const AccountArea = () => {
                 <span
                   className={style.actionbar__text}
                   onClick={() => {
-                    router.push('/signin');
+                    router.push('/auth/signin');
                   }}
                 >
                   로그인
@@ -72,7 +72,7 @@ const AccountArea = () => {
                 <span
                   className={style.actionbar__text}
                   onClick={() => {
-                    router.push('/signup');
+                    router.push('/auth/signup');
                   }}
                 >
                   회원가입

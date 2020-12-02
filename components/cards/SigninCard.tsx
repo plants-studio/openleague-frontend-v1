@@ -70,7 +70,7 @@ const SigninCard = () => {
           <Button
             themeType="secondary"
             onClick={() => {
-              //TODO 회원가입 구현
+              router.push('/auth/signup');
             }}
           >
             회원가입
