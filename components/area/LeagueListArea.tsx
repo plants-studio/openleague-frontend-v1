@@ -108,8 +108,6 @@ const getDeadline = (applicationDeadline: number) => {
 
   var diff = diffDate_1.getTime() - diffDate_2.getTime();
   diff = Math.ceil(diff / (1000 * 3600 * 24));
-
-  console.log(diff);
   return diff;
 };
 

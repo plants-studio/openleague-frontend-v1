@@ -10,6 +10,9 @@ import {
   REFRESH_SUCCESS,
   REFRESH_FAILURE,
   RELOAD_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
 } from '../reducer/userReducer';
 import Cookies from 'js-cookie';
 import { getDecodedAccessTokenData } from '../../utils/decode';
@@ -25,6 +28,7 @@ export function* userSaga() {
   yield takeEvery(LOGOUT, logoutSaga);
   yield takeEvery(RELOAD_REQUEST, reloadSaga);
   yield takeEvery(REFRESH_REQUEST, refreshRequestSaga);
+  yield takeEvery(SIGNUP_REQUEST, signupRequestSaga);
 }
 
 // REVIEW
@@ -106,6 +110,27 @@ function* refreshRequestSaga(action) {
   }
 }
 
+// NOTE SAGA FUNCTION
+function* signupRequestSaga(action) {
+  console.log('SAGA: signupRequest');
+  try {
+    const response = yield call(
+      AauthSignup,
+      action.payload.name,
+      action.payload.email,
+      action.payload.password,
+    );
+    if (response.status === 200) {
+      yield put({
+        type: SIGNUP_SUCCESS,
+      });
+    }
+  } catch (e) {
+    yield call(asSignupFailed, e);
+    yield put({ type: SIGNUP_FAILURE });
+  }
+}
+
 // TODO alert 메소드를 UI로 제대로 구현하기(모달로)
 const asLoginFailed = (e) => {
   switch (e.response.status) {
@@ -124,8 +149,27 @@ const asLoginFailed = (e) => {
   }
 };
 
+const asSignupFailed = (e) => {
+  switch (e.response.status) {
+    case 409:
+      alert('이미 존재하는 계정입니다!');
+      break;
+    default:
+      alert('알수 없는 오류가 발생했습니다.');
+      break;
+  }
+};
+
 function AauthSignin(email: string, password: string) {
   return axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/signin`, {
+    email,
+    password,
+  });
+}
+
+function AauthSignup(name: string, email: string, password: string) {
+  return axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/signup`, {
+    name,
     email,
     password,
   });

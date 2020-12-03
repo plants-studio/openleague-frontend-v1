@@ -1,4 +1,5 @@
-import { DefaultLoginProps } from '../../types/authType';
+import { stat } from 'fs';
+import { DefaultLoginProps, DefaultSignupProps } from '../../types/authType';
 
 // NOTE ACTION TYPE
 export const LOGIN_REQUEST = 'user/LOGIN_REQUEST' as const;
@@ -10,6 +11,9 @@ export const RELOAD_FAILURE = 'user/RELOAD_FAILURE' as const;
 export const REFRESH_REQUEST = 'user/REFRESH_REQUEST' as const;
 export const REFRESH_SUCCESS = 'user/REFRESH_SUCCESS' as const;
 export const REFRESH_FAILURE = 'user/REFRESH_FAILURE' as const;
+export const SIGNUP_REQUEST = 'user/SIGNUP_REQUEST' as const;
+export const SIGNUP_SUCCESS = 'user/SIGNUP_SUCCESS' as const;
+export const SIGNUP_FAILURE = 'user/SIGNUP_FAILURE' as const;
 
 // NOTE ACTION FUNCTION
 export const loginRequest = (diff: DefaultLoginProps) => ({
@@ -34,6 +38,12 @@ export const refreshSuccess = (diff: {
   userProfileImage: string;
 }) => ({ type: REFRESH_SUCCESS, payload: diff });
 export const refreshFailure = () => ({ type: REFRESH_FAILURE });
+export const signupRequest = (diff: DefaultSignupProps) => ({
+  type: SIGNUP_REQUEST,
+  payload: diff,
+});
+export const signupSuccess = () => ({ type: SIGNUP_SUCCESS });
+export const signupFailure = () => ({ type: SIGNUP_FAILURE });
 
 // NOTE ACTION TYPE
 type UserAction =
@@ -45,7 +55,10 @@ type UserAction =
   | ReturnType<typeof reloadFailure>
   | ReturnType<typeof refreshRequest>
   | ReturnType<typeof refreshSuccess>
-  | ReturnType<typeof refreshFailure>;
+  | ReturnType<typeof refreshFailure>
+  | ReturnType<typeof signupRequest>
+  | ReturnType<typeof signupSuccess>
+  | ReturnType<typeof signupFailure>;
 
 // NOTE STORE TYPE
 type UserState = {
@@ -109,6 +122,12 @@ function user(state = initialState, action: UserAction) {
       };
     case REFRESH_FAILURE:
       return { ...state, isLogin: false, isLoadDone: true };
+    case SIGNUP_REQUEST:
+      return state;
+    case SIGNUP_SUCCESS:
+      return state;
+    case SIGNUP_FAILURE:
+      return state;
     default:
       return state;
   }
