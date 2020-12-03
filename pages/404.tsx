@@ -1,17 +1,11 @@
-import { useRouter } from 'next/router';
+import React from 'react';
+import FullPageWrapper from '../components/templates/BackgroundPatternWrapper';
+import NotFoundCard from '../components/cards/NotFoundCard';
 
 export default function NotFound() {
-  const router = useRouter();
   return (
-    <>
-      <div>존재하지 않는 페이지입니다!</div>
-      <button
-        onClick={() => {
-          router.back();
-        }}
-      >
-        뒤로가기
-      </button>
-    </>
+    <FullPageWrapper isFullScreenMode={true}>
+      <NotFoundCard />
+    </FullPageWrapper>
   );
 }

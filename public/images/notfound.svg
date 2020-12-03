@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 277 157">
+  <g id="_404_B_" data-name="404(B)" transform="translate(-854 -387)">
+    <text id="Design_Juicy" data-name="Design Juicy" transform="translate(854 511)" fill="#343a40" font-size="130" font-family="Roboto-Black, Roboto" font-weight="800"><tspan x="0" y="0">4</tspan></text>
+    <text id="Design_Juicy-2" data-name="Design Juicy" transform="translate(1055 511)" fill="#343a40" font-size="130" font-family="Roboto-Black, Roboto" font-weight="800"><tspan x="0" y="0">4</tspan></text>
+    <g id="pacman" transform="translate(946.731 414.118)">
+      <path id="패스_2883" data-name="패스 2883" d="M51.571,0A51.358,51.358,0,0,1,84.1,11.551l8.293,8.293-7.422,7.422,0,0L60.656,51.571,81.5,72.419l-.007.007L92.411,83.342l-8.1,8.1-.013-.013A51.572,51.572,0,1,1,51.571,0Z" transform="translate(16.46 0)" fill="#343a40" fill-rule="evenodd" opacity="0.1"/>
+      <g id="그룹_3117" data-name="그룹 3117" transform="translate(0 0)">
+        <path id="패스_951" data-name="패스 951" d="M5.73,11.46A5.73,5.73,0,1,0,0,5.73,5.73,5.73,0,0,0,5.73,11.46Z" transform="translate(51.935 17.191)" fill="#343a40"/>
+        <path id="패스_952" data-name="패스 952" d="M51.571,0A51.358,51.358,0,0,1,84.1,11.551l8.293,8.293-7.422,7.422,0,0L60.656,51.571,81.5,72.419l-.007.007L92.411,83.342l-8.1,8.1-.013-.013A51.572,51.572,0,1,1,51.571,0ZM44.448,51.571l31.7,31.7a40.111,40.111,0,1,1,0-63.4Z" transform="translate(0 0)" fill="#343a40" fill-rule="evenodd"/>
+      </g>
+    </g>
+  </g>
+</svg>

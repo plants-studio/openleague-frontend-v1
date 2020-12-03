@@ -1,4 +1,5 @@
 import React from 'react';
+import { start } from 'repl';
 import LeaguePreviewCard from './../cards/LeaguePreviewCard';
 import style from './LeagueListArea.module.scss';
 
@@ -6,12 +7,13 @@ interface IProps {
   leagueList: any[];
 }
 
+// TODO 배틀그라운드, 기타 카테고리의 컬러코드 선택하기
 const LeagueCode = {
   LeagueOfLegend: '#0CA76A',
-  Overwatch: 'red',
-  Valorant: 'blue',
-  chinese: 'zh',
-  spanish: 'es',
+  Overwatch: '#FC9826',
+  Valorant: '#FF4654',
+  Battleground: 'zh',
+  RainbowSixSiege: '#5F5F5F',
 } as const;
 
 // TODO map 방식으로 동작되는 리스트 만들기
@@ -38,7 +40,10 @@ const LeagueListArea = ({ leagueList }: IProps) => {
             title={league.title}
             placeType={getPlaceType(league.placeType)}
             teamReqMemCnt={league.teamReqMemCnt}
-            leagueSchedule={league.leagueStartDay}
+            leagueSchedule={getLeagueSchedule(
+              league.leagueStartDay,
+              league.leagueEndDay,
+            )}
             applicationDeadline={getDeadline(league.applicationDeadline)}
             percentage={getPercentage(
               league.applicant,
@@ -67,6 +72,19 @@ const getPercentage = (
 const getPlaceType = (placeType: string) => {
   if (placeType === 'online') return '온라인';
   else return '오프라인';
+};
+
+// TODO 달이나 일 앞에 붙은 0 제거하기
+const getLeagueSchedule = (leagueStartDay: string, leagueEndDay: string) => {
+  const startDayArray = leagueStartDay.split('-');
+  const endDayArray = leagueEndDay.split('-');
+  if (leagueStartDay === leagueEndDay) {
+    const schedule = startDayArray[1] + '월' + startDayArray[2] + '일';
+    return schedule;
+  } else {
+    const schedule = `${startDayArray[1]}월 ${startDayArray[2]}일 ~ ${endDayArray[1]}월 ${endDayArray[2]}일`;
+    return schedule;
+  }
 };
 
 const getDeadline = (applicationDeadline: number) => {
