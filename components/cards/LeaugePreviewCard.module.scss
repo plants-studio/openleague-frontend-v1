@@ -1,3 +1,9 @@
+.clickwrapper {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .contentArea {
   padding: 1rem;
 }

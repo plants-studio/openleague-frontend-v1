@@ -10,7 +10,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import axios from 'axios';
 import { resolve } from 'path';
 
-// TODO getStaticProps로 1초마다 서버에서 데이터 받아온다음 넘기기
 export default function Index({
   leagueList,
 }: InferGetStaticPropsType<typeof getStaticProps>) {

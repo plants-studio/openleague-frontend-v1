@@ -2,6 +2,7 @@ import React from 'react';
 import { start } from 'repl';
 import LeaguePreviewCard from './../cards/LeaguePreviewCard';
 import style from './LeagueListArea.module.scss';
+import { useRouter } from 'next/router';
 
 interface IProps {
   leagueList: any[];
@@ -18,6 +19,7 @@ const LeagueCode = {
 
 // TODO map 방식으로 동작되는 리스트 만들기
 const LeagueListArea = ({ leagueList }: IProps) => {
+  const router = useRouter();
   return (
     <>
       <div className={style.container}>
@@ -54,6 +56,10 @@ const LeagueListArea = ({ leagueList }: IProps) => {
             applicantMinMax={league.teamMin}
             color={LeagueCode[`${league.game.replace(/ /g, '')}`]}
             thumbnail={league.thumbnail}
+            onClick={() => {
+              console.log(`move to ${league._id}`);
+              router.push(`/openleague/${league._id}`);
+            }}
           />
         ))}
       </div>
