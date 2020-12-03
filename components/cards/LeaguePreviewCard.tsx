@@ -46,6 +46,7 @@ const LeaguePreviewCard = ({
             height="200px"
             imagePath={`${process.env.NEXT_PUBLIC_BACKEND}${thumbnail}`}
             loadMode="lazy"
+            quality={100}
           ></StaticImageWrapper>
         </div>
         <div className={style.contentArea}>

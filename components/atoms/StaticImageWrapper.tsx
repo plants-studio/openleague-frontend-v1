@@ -11,6 +11,7 @@ interface IProps {
   imagePath: string;
   loadMode?: 'lazy' | 'eager';
   isFillMode?: boolean;
+  quality?: number;
 }
 
 const StaticImageWrapper = ({
@@ -22,6 +23,7 @@ const StaticImageWrapper = ({
   imagePath,
   loadMode,
   isFillMode = false,
+  quality = 75,
 }: IProps) => {
   const [isLoad, setIsLoad] = useState(true);
   const [done, setDone] = useState(false);
@@ -46,6 +48,7 @@ const StaticImageWrapper = ({
             onLoad={() => {
               setIsLoad(false);
             }}
+            quality={quality}
           ></Image>
         ) : (
           <Image
@@ -58,6 +61,7 @@ const StaticImageWrapper = ({
             onLoad={() => {
               setIsLoad(false);
             }}
+            quality={quality}
           ></Image>
         )}
       </div>
