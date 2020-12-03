@@ -3499,9 +3499,9 @@ pkg-dir@^4.1.0:
     find-up "^4.0.0"
 
 plants-ui@^1.0.9:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/plants-ui/-/plants-ui-1.0.15.tgz#4e4ee236bb53fb758451ecfdba525222709eb51d"
-  integrity sha512-4UE9A2GLaoMIQs0BBqxei4rCkjbF3cAUqpd+Rzn3dsT+sHCRpmDTJTGrp8Og6SmeQHFN4TIaH5zBd5BJgu7r1Q==
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/plants-ui/-/plants-ui-1.0.16.tgz#fe403dd4a85aa289c99c1db7276ea554a716fe94"
+  integrity sha512-Wxvw7oy4QGcZ2NwJl3LplvP7YbfqVrVw6P8ktsw45QlKJYnn42OU1u4DiYj0Y2MSgqFUrH062xTFdi2GBHr6Cg==
 
 platform@1.3.3:
   version "1.3.3"

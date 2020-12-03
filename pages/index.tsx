@@ -72,3 +72,26 @@ export async function getStaticProps() {
     revalidate: 1,
   };
 }
+
+// This function gets called at build time
+export async function getStaticPaths() {
+  const leagueList = await axios
+    .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`, {
+      params: {
+        page: 1,
+        limit: 12,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+
+  // Get the paths we want to pre-render based on posts
+  const paths = leagueList.map((league) => ({
+    params: { id: league.id },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}

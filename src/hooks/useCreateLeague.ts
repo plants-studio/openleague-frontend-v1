@@ -19,7 +19,7 @@ export default function useCreateLeague() {
           reader.onloadend = async () => {
             const base64data = reader.result;
             await axios.post(
-              'http://open-league-back.herokuapp.com/api/v1/league',
+              `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`,
               { ...leagueData, thumbnail: base64data },
               {
                 headers: {
