@@ -6,6 +6,14 @@ interface IProps {
   leagueList: any[];
 }
 
+const LeagueCode = {
+  LeagueOfLegend: '#0CA76A',
+  Overwatch: 'red',
+  Valorant: 'blue',
+  chinese: 'zh',
+  spanish: 'es',
+} as const;
+
 // TODO map 방식으로 동작되는 리스트 만들기
 const LeagueListArea = ({ leagueList }: IProps) => {
   return (
@@ -28,7 +36,7 @@ const LeagueListArea = ({ leagueList }: IProps) => {
           <LeaguePreviewCard
             game={league.game.toUpperCase()}
             title={league.title}
-            placeType={league.placeType}
+            placeType={getPlaceType(league.placeType)}
             teamReqMemCnt={league.teamReqMemCnt}
             leagueSchedule={league.leagueStartDay}
             applicationDeadline={getDeadline(league.applicationDeadline)}
@@ -39,7 +47,7 @@ const LeagueListArea = ({ leagueList }: IProps) => {
             )}
             applicant={league.applicant}
             applicantMinMax={league.teamMin}
-            color={'#0CA76A'}
+            color={LeagueCode[`${league.game.replace(/ /g, '')}`]}
             thumbnail={league.thumbnail}
           />
         ))}
@@ -54,6 +62,11 @@ const getPercentage = (
   teamMin: number,
 ) => {
   return (applicant / (teamReqMemCnt * teamMin)) * 100;
+};
+
+const getPlaceType = (placeType: string) => {
+  if (placeType === 'online') return '온라인';
+  else return '오프라인';
 };
 
 const getDeadline = (applicationDeadline: number) => {
