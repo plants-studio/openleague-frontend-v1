@@ -9,10 +9,12 @@ import GameSelectorCard from '../components/cards/GameSelectorCard';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import axios from 'axios';
 import { resolve } from 'path';
+import { useRouter } from 'next/router';
 
 export default function Index({
   leagueList,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
   const [accessToken, setAccessToken] = useState(null);
 
   const [UserName, setUserName] = useState('');
@@ -22,7 +24,6 @@ export default function Index({
       setUserName(Cookies.get('name'));
       setAccessToken(Cookies.get('accessToken'));
     }
-    console.log(leagueList);
   }, []);
 
   return (
@@ -34,13 +35,6 @@ export default function Index({
         </CardRowLayout>
         <GameSelectorCard />
         <LeagueListArea leagueList={leagueList} />
-        <button
-          onClick={() => {
-            console.log(getLeagueList());
-          }}
-        >
-          테스트
-        </button>
       </GlobalLayout>
     </div>
   );

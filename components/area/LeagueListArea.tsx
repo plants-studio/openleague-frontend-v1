@@ -23,19 +23,6 @@ const LeagueListArea = ({ leagueList }: IProps) => {
   return (
     <>
       <div className={style.container}>
-        {/*
-        <LeaguePreviewCard
-          game="LEAGUE OF LEGEND"
-          title="이건 대회이름입니다"
-          placeType="오프라인"
-          teamReqMemCnt={5}
-          leagueSchedule="11월 20일"
-          applicationDeadline={3}
-          percentage={50}
-          applicant={35}
-          applicantMinMax="80명 이상 100명 이하"
-          color="#0CA76A"
-        /> */}
         {leagueList.map((league) => (
           <LeaguePreviewCard
             game={league.game.toUpperCase()}
@@ -58,11 +45,22 @@ const LeagueListArea = ({ leagueList }: IProps) => {
             thumbnail={league.thumbnail}
             onClick={() => {
               console.log(`move to ${league._id}`);
-              router.push(`/openleague/${league._id}`);
+              router.push({
+                pathname: '/openleague/[_id]',
+                query: { _id: league._id },
+              });
             }}
           />
         ))}
       </div>
+
+      <button
+        onClick={() => {
+          console.log('더보기!');
+        }}
+      >
+        테스트
+      </button>
     </>
   );
 };
