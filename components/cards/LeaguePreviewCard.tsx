@@ -50,7 +50,7 @@ const LeaguePreviewCard = ({
           <Header size="small" isOverflowMode={true}>
             {title}
           </Header>
-          <SubHeader size="small">
+          <SubHeader padding="0" size="small">
             {placeType} · {teamReqMemCnt}인 · {leagueSchedule}
           </SubHeader>
         </div>
