@@ -6,16 +6,10 @@ import { useRouter } from 'next/router';
 import StaticImageWrapper from '../atoms/StaticImageWrapper';
 import style from './SigninCard.module.scss';
 
+// TODO 로그인 리퀘스트를 걸었을때 로딩중인 애니메이션이 뜨게 하기
 const SigninCard = () => {
   const router = useRouter();
-  const {
-    isLogin,
-    isLoadDone,
-    email,
-    userName,
-    CLoginRequest,
-    CAuthLogout,
-  } = useUser();
+  const { isLogin, isLoadDone, CLoginRequest } = useUser();
 
   const [account, setAccount] = useState({
     email: '',

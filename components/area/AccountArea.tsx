@@ -15,12 +15,6 @@ const AccountArea = () => {
     CAuthLogout,
   } = useUser();
 
-  useEffect(() => {
-    if (!isLogin) {
-      router.push('/');
-    }
-  }, [isLogin]);
-
   const router = useRouter();
   return (
     <div className={style.areawrapper}>

@@ -69,6 +69,6 @@ export async function getStaticProps() {
     props: {
       leagueList,
     },
-    //revalidate: 1,
+    revalidate: 1,
   };
 }

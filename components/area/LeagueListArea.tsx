@@ -40,6 +40,7 @@ const LeagueListArea = ({ leagueList }: IProps) => {
             applicant={league.applicant}
             applicantMinMax={league.teamMin}
             color={'#0CA76A'}
+            thumbnail={league.thumbnail}
           />
         ))}
       </div>

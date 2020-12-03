@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Header, SubHeader, Progress, Sticker } from 'plants-ui';
 import style from './LeaugePreviewCard.module.scss';
+import StaticImageWrapper from '../atoms/StaticImageWrapper';
 
 interface IProps {
   game: string;
@@ -13,6 +14,7 @@ interface IProps {
   applicant: number;
   applicantMinMax: string;
   color: string;
+  thumbnail: string;
 }
 
 // TODO 바로 구현되어있는 스타일 UI라이브러리로 옮기기
@@ -27,6 +29,7 @@ const LeaguePreviewCard = ({
   applicant,
   applicantMinMax,
   color,
+  thumbnail,
 }: IProps) => {
   return (
     <Card isPadding={false}>
@@ -34,11 +37,13 @@ const LeaguePreviewCard = ({
         <Sticker backgroundColor={color} top="1rem" left="1rem">
           {game}
         </Sticker>
-        <img
-          className={style.image}
-          src="/testimage.jpg"
-          alt="테스트이미지"
-        ></img>
+        <StaticImageWrapper
+          isFillMode={true}
+          width="100%"
+          height="200px"
+          imagePath={`${process.env.NEXT_PUBLIC_BACKEND}${thumbnail}`}
+          loadMode="lazy"
+        ></StaticImageWrapper>
       </div>
       <div className={style.contentArea}>
         <div className={style.headerArea}>
