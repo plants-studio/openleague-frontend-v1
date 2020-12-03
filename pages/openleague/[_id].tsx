@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 
   // Get the paths we want to pre-render based on posts
   const paths = leagueList.map((league) => ({
-    params: { id: league._id },
+    params: { _id: league._id },
   }));
 
   // We'll pre-render only these paths at build time.
@@ -38,7 +38,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const leagueDetail = await axios
-    .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${params}`, {})
+    .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${params._id}`, {})
     .then((response) => {
       return response.data;
     });
