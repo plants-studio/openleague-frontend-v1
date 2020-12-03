@@ -27,7 +27,7 @@ export default function Index({
   }, []);
 
   return (
-    <div>
+    <>
       <GlobalLayout>
         <CardRowLayout>
           <HeroBannerCard />
@@ -36,16 +36,9 @@ export default function Index({
         <GameSelectorCard />
         <LeagueListArea leagueList={leagueList} />
       </GlobalLayout>
-    </div>
+    </>
   );
 }
-
-const getLeagueList = async () => {
-  try {
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 export async function getStaticProps() {
   const leagueList = await axios

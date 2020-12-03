@@ -1,16 +1,31 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import GlobalLayout from '../../components/templates/GlobalLayout';
 
 export default function League({ leagueDetail }) {
+  const [showChild, setShowChild] = useState(false);
+
   const router = useRouter();
 
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   if (router.isFallback) {
-    return <div>Loading...</div>;
+    return <div>Fallback로딩중입니다</div>;
   }
 
-  return <h1>안녕</h1>;
+  // Wait until after client-side hydration to show
+  useEffect(() => {
+    console.log('mount!');
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    // TODO 로딩중이라는 글로벌 플레이스홀더 만들기
+    return <span>로딩중입니다</span>;
+  }
+
+  return <GlobalLayout>aa</GlobalLayout>;
 }
 
 // This function gets called at build time

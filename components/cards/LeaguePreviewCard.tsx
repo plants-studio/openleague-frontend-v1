@@ -77,7 +77,6 @@ const LeaguePreviewCard = ({
                   className={style.bottomInfoArea__applicantMinMax}
                   style={{ color: color }}
                 >
-                  {' '}
                   / {applicantMinMax}
                 </span>
               </div>

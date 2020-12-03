@@ -7,6 +7,7 @@ import StaticImageWrapper from '../atoms/StaticImageWrapper';
 import style from './SigninCard.module.scss';
 
 // TODO 로그인 리퀘스트를 걸었을때 로딩중인 애니메이션이 뜨게 하기
+// TODO 모달을 띄워서 존재하지 않는 계정입니다 등을 표시하기
 const SigninCard = () => {
   const router = useRouter();
   const { isLogin, isLoadDone, CLoginRequest } = useUser();

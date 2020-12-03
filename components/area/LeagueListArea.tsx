@@ -25,6 +25,7 @@ const LeagueListArea = ({ leagueList }: IProps) => {
       <div className={style.container}>
         {leagueList.map((league) => (
           <LeaguePreviewCard
+            key={league._id}
             game={league.game.toUpperCase()}
             title={league.title}
             placeType={getPlaceType(league.placeType)}

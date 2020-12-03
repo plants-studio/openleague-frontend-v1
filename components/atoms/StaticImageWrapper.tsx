@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import style from './StaticImageWrapper.module.scss';
 
@@ -23,33 +23,45 @@ const StaticImageWrapper = ({
   loadMode,
   isFillMode = false,
 }: IProps) => {
+  const [isLoad, setIsLoad] = useState(true);
+  const [done, setDone] = useState(false);
+
   return (
-    <div
-      className={style.imageWrapper}
-      style={{
-        width: width,
-        height: height,
-        borderRadius: borderRadius,
-      }}
-    >
-      {isFillMode ? (
-        <Image
-          src={imagePath}
-          layout="fill"
-          objectFit="cover"
-          loading={loadMode}
-        ></Image>
-      ) : (
-        <Image
-          src={imagePath}
-          width={OptWidth}
-          height={OptHeight}
-          layout="responsive"
-          objectFit="cover"
-          loading={loadMode}
-        ></Image>
-      )}
-    </div>
+    <>
+      {isLoad ? <h1>로딩중</h1> : <h2>다됨</h2>}
+      <div
+        className={style.imageWrapper}
+        style={{
+          width: width,
+          height: height,
+          borderRadius: borderRadius,
+        }}
+      >
+        {isFillMode ? (
+          <Image
+            src={imagePath}
+            layout="fill"
+            objectFit="cover"
+            loading={loadMode}
+            onLoad={() => {
+              setIsLoad(false);
+            }}
+          ></Image>
+        ) : (
+          <Image
+            src={imagePath}
+            width={OptWidth}
+            height={OptHeight}
+            layout="responsive"
+            objectFit="cover"
+            loading={loadMode}
+            onLoad={() => {
+              setIsLoad(false);
+            }}
+          ></Image>
+        )}
+      </div>
+    </>
   );
 };
 
