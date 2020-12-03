@@ -29,10 +29,6 @@ const SigninCard = () => {
     }
   }, [isLogin]);
 
-  useEffect(() => {
-    router.prefetch('/');
-  }, []);
-
   return (
     <Card width="25rem">
       <div>

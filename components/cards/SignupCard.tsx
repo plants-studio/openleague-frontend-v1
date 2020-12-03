@@ -34,11 +34,6 @@ const SignupCard = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  useEffect(() => {
-    router.prefetch('/auth/signin');
-  }, []);
-
   return (
     <Card width="25rem">
       <div>
