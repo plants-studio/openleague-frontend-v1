@@ -19,3 +19,27 @@ a {
 hr {
   margin: 0;
 }
+
+h1 h2 h3 h4 h5 h6 {
+  margin: 0;
+}
+
+select {
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type='date'] {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+input[type='date']::-webkit-inner-spin-button {
+  display: none;
+  appearance: none;
+}

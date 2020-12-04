@@ -9,6 +9,7 @@ interface IProps {
   nowSelected: string;
 }
 
+// TODO 클릭의 범위가 텍스트에만 국한됨
 const RadioInput = ({
   name,
   children,

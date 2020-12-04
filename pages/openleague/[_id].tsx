@@ -8,8 +8,7 @@ import GlobalLayout from '../../components/templates/GlobalLayout';
 export default function League({ leagueDetail }) {
   const router = useRouter();
 
-  // If the page is not yet generated, this will be displayed
-  // initially until getStaticProps() finishes running
+  // NOTE 페이지가 render되지 않았다면
   if (router.isFallback) {
     return <div>Fallback로딩중입니다</div>;
   }
@@ -25,8 +24,8 @@ export default function League({ leagueDetail }) {
         <title>오픈리그 | {leagueDetail.title}</title>
         <meta
           property="og:title"
-          content="오픈리그 | leagueDetail.title "
-          key="title"
+          content={`오픈리그 | ${leagueDetail.title}`}
+          key="leaguetitle"
         />
       </Head>
       <GlobalLayout>
@@ -38,27 +37,6 @@ export default function League({ leagueDetail }) {
 
 // This function gets called at build time
 export async function getStaticPaths() {
-  /*
-  const leagueList = await axios
-    .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`, {
-      params: {
-        page: 1,
-        limit: 12,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    });
-
-  // Get the paths we want to pre-render based on posts
-  const paths = leagueList.map((league) => ({
-    params: { _id: league._id },
-  }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-
-  return { paths, fallback: true };  */
   return { paths: [], fallback: true };
 }
 

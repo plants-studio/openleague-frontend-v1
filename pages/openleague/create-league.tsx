@@ -1,12 +1,15 @@
 import React from 'react';
 import GlobalLayout from '../../components/templates/GlobalLayout';
 import CreateLeagueWrapper from '../../components/utility/CreateLeagueWrapper';
+import BackgroundPatternWrapper from '../../components/templates/BackgroundPatternWrapper';
 
 export default function CreateLeague() {
   return (
     <div>
       <GlobalLayout>
-        <CreateLeagueWrapper />
+        <BackgroundPatternWrapper>
+          <CreateLeagueWrapper />
+        </BackgroundPatternWrapper>
       </GlobalLayout>
     </div>
   );
