@@ -1,3 +1,5 @@
+import Head from 'next/head';
+import React from 'react';
 import GlobalLayout from './../components/templates/GlobalLayout';
 import Counter from './../components/test/Counter';
 

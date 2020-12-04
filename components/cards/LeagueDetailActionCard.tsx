@@ -20,11 +20,15 @@ const LeagueDetailActionCard = ({
       <div>
         <Header size="small">{title}</Header>
         <div className={style.deadlinearea}>
-          <Stopwatch height="1rem" fill="#f23c4c" />
-          <ContentType>접수 마감까지 {applicationDeadline}일 남음</ContentType>
+          <Stopwatch
+            className={style.deadlinearea__icon}
+            height="0.9rem"
+            fill="#f23c4c"
+          />
+          <ContentType>접수 마감까지 {applicationDeadline}일</ContentType>
         </div>
       </div>
-      <DividerLine />
+      <DividerLine margin="1rem" />
       <div>하하</div>
     </Card>
   );

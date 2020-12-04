@@ -1,3 +1,12 @@
 .deadlinearea {
+  margin-top: 0.25rem;
   color: #f23c4c;
+  display: flex;
+  flex-direction: row;
+  justify-self: flex-start;
+  align-items: center;
+
+  &__icon {
+    margin-right: 0.5rem;
+  }
 }

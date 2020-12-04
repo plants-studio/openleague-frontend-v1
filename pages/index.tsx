@@ -10,6 +10,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import axios from 'axios';
 import { resolve } from 'path';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Index({
   leagueList,

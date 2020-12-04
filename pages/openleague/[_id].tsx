@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import LeagueDetailArea from '../../components/area/LeagueDetailArea';
@@ -26,9 +27,19 @@ export default function League({ leagueDetail }) {
   }
 
   return (
-    <GlobalLayout>
-      <LeagueDetailArea leagueDetail={leagueDetail} />
-    </GlobalLayout>
+    <>
+      <Head>
+        <title>오픈리그 | {leagueDetail.title}</title>
+        <meta
+          property="og:title"
+          content="오픈리그 | leagueDetail.title "
+          key="title"
+        />
+      </Head>
+      <GlobalLayout>
+        <LeagueDetailArea leagueDetail={leagueDetail} />
+      </GlobalLayout>
+    </>
   );
 }
 
