@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'plants-ui';
 import CardWrapper from '../templates/CardWrapper';
-import TextInput from '../atoms/TextInput';
+import TextInput from '../atoms/CustomInput';
 
 const LeagueSearchToolCard = () => {
   return (

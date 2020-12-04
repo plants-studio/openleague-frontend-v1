@@ -4,7 +4,7 @@ import { Card } from 'plants-ui';
 import WysiwygEditor from '../../components/utility/WysiwygEditor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import 'codemirror/lib/codemirror.css';
-import TextInput from '../../components/atoms/TextInput';
+import CustomInput from '../atoms/CustomInput';
 import RadioInput from '../../components/atoms/RadioInput';
 import CardRowLayout from '../templates/CardRowLayout';
 
@@ -71,7 +71,7 @@ const CreateLeagueWrapper = () => {
     <>
       <CardRowLayout>
         <Card width="400px" cardTitle="대회 개설">
-          <TextInput
+          <CustomInput
             name="title"
             type="text"
             placeholder="대회 이름을 입력해주세요!"
@@ -80,7 +80,7 @@ const CreateLeagueWrapper = () => {
             }}
             width="100%"
             maxLength={40}
-          ></TextInput>
+          ></CustomInput>
           <br />
           <span>신청 마감일</span>
           <input
@@ -112,14 +112,14 @@ const CreateLeagueWrapper = () => {
           <br />
         </Card>
         <Card cardTitle="게임 선택">
-          <TextInput
+          <CustomInput
             type="text"
             name="game"
             placeholder="게임 선택"
             onChange={(e) => {
               handleText(e);
             }}
-          ></TextInput>
+          ></CustomInput>
         </Card>
       </CardRowLayout>
       <Card cardTitle="대회 방법">
@@ -143,19 +143,19 @@ const CreateLeagueWrapper = () => {
             </RadioInput>
           </div>
           {leagueData.placeType === 'online' ? (
-            <TextInput
+            <CustomInput
               type="text"
               name="discordLink"
               onChange={handleText}
               placeholder="대회 진행에 사용할 디스코드 서버 초대링크"
-            ></TextInput>
+            ></CustomInput>
           ) : (
-            <TextInput
+            <CustomInput
               type="text"
               name="location"
               onChange={handleText}
               placeholder="대회 장소"
-            ></TextInput>
+            ></CustomInput>
           )}
         </>
       </Card>
@@ -167,24 +167,24 @@ const CreateLeagueWrapper = () => {
         <WysiwygEditor onChange={handleRule}></WysiwygEditor>
       </Card>
       <Card cardTitle="인원">
-        <input
+        <CustomInput
           type="number"
           name="teamReqMemCnt"
           onChange={handleNumber}
           placeholder="팀 인원수"
-        ></input>
-        <input
+        ></CustomInput>
+        <CustomInput
           type="number"
           name="teamMin"
           onChange={handleNumber}
           placeholder="최소 팀 수"
-        ></input>
-        <input
+        ></CustomInput>
+        <CustomInput
           type="number"
           name="teamMax"
           onChange={handleNumber}
           placeholder="최대 팀 수"
-        ></input>
+        ></CustomInput>
       </Card>
       <Card>
         <button

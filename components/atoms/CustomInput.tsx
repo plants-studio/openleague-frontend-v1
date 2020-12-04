@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './TextInput.module.scss';
+import style from './CustomInput.module.scss';
 
 interface IProps {
   type: string;
@@ -11,7 +11,7 @@ interface IProps {
   margin?: string;
 }
 
-const TextInput = ({
+const CustomInput = ({
   type,
   placeholder,
   name,
@@ -33,4 +33,4 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+export default CustomInput;

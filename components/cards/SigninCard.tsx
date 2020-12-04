@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'plants-ui';
 import useUser from './../../src/hooks/useUser';
-import TextInput from '../atoms/TextInput';
+import TextInput from '../atoms/CustomInput';
 import { useRouter } from 'next/router';
 import StaticImageWrapper from '../atoms/StaticImageWrapper';
 import style from './SigninCard.module.scss';
