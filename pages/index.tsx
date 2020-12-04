@@ -19,6 +19,12 @@ function test(id) {
 export default function Index({
   leagueList,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+  useEffect(() => {
+    router.prefetch('/community');
+    router.prefetch('/home');
+  }, []);
+
   return (
     <>
       <GlobalLayout>

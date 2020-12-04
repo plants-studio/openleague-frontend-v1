@@ -8,7 +8,6 @@ export default function Login() {
 
   useEffect(() => {
     router.prefetch('/auth/signin');
-    router.prefetch('/');
   }, []);
 
   return (
