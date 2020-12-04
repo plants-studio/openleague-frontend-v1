@@ -58,8 +58,8 @@ const LeagueBasicInformation = ({
             </>
           ) : (
             <>
-              <span className={style.name}>게임 종목</span>
-              <span className={style.value}>{game}</span>
+              <span className={style.name}>대회 장소</span>
+              <span className={style.value}>{location}</span>
             </>
           )}
         </div>

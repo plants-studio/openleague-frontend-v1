@@ -61,6 +61,9 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
           location={leagueDetail.location}
           discordLink={leagueDetail.discordLink}
         />
+        <Card cardTitle="대회 규정">
+          <Viewer initialValue={leagueDetail.rule} />
+        </Card>
       </CardGroup>
       <div className={style.fixedarea}>
         <LeagueDetailActionCard
@@ -71,6 +74,7 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
           )}
         ></LeagueDetailActionCard>
       </div>
+      <div className={style.mockarea}></div>
     </div>
   );
 };
