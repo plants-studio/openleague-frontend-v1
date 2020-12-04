@@ -15,7 +15,7 @@ const gameList = [
   { id: 2, name: 'Overwatch', imagePath: '/images/game-overwatch.jpg' },
   {
     id: 3,
-    name: 'Playerunkowns Battleground',
+    name: 'Battleground',
     imagePath: '/images/game-battleground.jpg',
   },
   {
@@ -27,12 +27,15 @@ const gameList = [
   { id: 6, name: 'Etc', imagePath: '/images/game-etc.jpg' },
 ];
 
-const GameSelectorCard = () => {
+interface IProps {
+  onClick?: (name: string) => void;
+}
+
+const GameSelectorCard = ({ onClick }: IProps) => {
   const minIndex = 0;
   const maxIndex = 1;
 
   const [margin, setMargin] = useState(0);
-  const [width, setWidth] = useState('');
 
   const imageSwipe = (direction: 'left' | 'right') => {
     if (direction === 'left' && margin / 100 < -minIndex) {
@@ -71,7 +74,11 @@ const GameSelectorCard = () => {
               }}
             >
               {gameList.map((game) => (
-                <div className={style.areadivider} key={game.id}>
+                <div
+                  className={style.areadivider}
+                  key={game.id}
+                  onClick={() => onClick(game.name)}
+                >
                   <div className={style.gamewrapper}>
                     <StaticImageWrapper
                       OptWidth={1201}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import useCreateLeague from '../../src/hooks/useCreateLeague';
-import { Card } from 'plants-ui';
+import useLeague from '../../src/hooks/useLeague';
+import { Button, Card } from 'plants-ui';
 import WysiwygEditor from '../../components/utility/WysiwygEditor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import 'codemirror/lib/codemirror.css';
@@ -9,7 +9,7 @@ import RadioInput from '../../components/atoms/RadioInput';
 import CardRowLayout from '../templates/CardRowLayout';
 
 const CreateLeagueWrapper = () => {
-  const { CCreateRequest } = useCreateLeague();
+  const { CCreateRequest } = useLeague();
   const [leagueData, setLeagueData] = useState({
     title: '',
     applicationDeadline: '',
@@ -111,6 +111,7 @@ const CreateLeagueWrapper = () => {
           />
           <br />
         </Card>
+
         <Card cardTitle="게임 선택">
           <CustomInput
             type="text"
@@ -122,6 +123,27 @@ const CreateLeagueWrapper = () => {
           ></CustomInput>
         </Card>
       </CardRowLayout>
+
+      <Card cardTitle="인원">
+        <CustomInput
+          type="number"
+          name="teamReqMemCnt"
+          onChange={handleNumber}
+          placeholder="팀 인원수"
+        ></CustomInput>
+        <CustomInput
+          type="number"
+          name="teamMin"
+          onChange={handleNumber}
+          placeholder="최소 팀 수"
+        ></CustomInput>
+        <CustomInput
+          type="number"
+          name="teamMax"
+          onChange={handleNumber}
+          placeholder="최대 팀 수"
+        ></CustomInput>
+      </Card>
       <Card cardTitle="대회 방법">
         <>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
@@ -166,34 +188,15 @@ const CreateLeagueWrapper = () => {
       <Card cardTitle="대회 규칙">
         <WysiwygEditor onChange={handleRule}></WysiwygEditor>
       </Card>
-      <Card cardTitle="인원">
-        <CustomInput
-          type="number"
-          name="teamReqMemCnt"
-          onChange={handleNumber}
-          placeholder="팀 인원수"
-        ></CustomInput>
-        <CustomInput
-          type="number"
-          name="teamMin"
-          onChange={handleNumber}
-          placeholder="최소 팀 수"
-        ></CustomInput>
-        <CustomInput
-          type="number"
-          name="teamMax"
-          onChange={handleNumber}
-          placeholder="최대 팀 수"
-        ></CustomInput>
-      </Card>
       <Card>
-        <button
+        <Button
+          themeType="primary"
           onClick={() => {
             CCreateRequest(leagueData);
           }}
         >
-          제출
-        </button>
+          대회 생성하기
+        </Button>
       </Card>
     </>
   );

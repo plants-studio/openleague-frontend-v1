@@ -12,6 +12,10 @@ import { resolve } from 'path';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
+function test(id) {
+  console.log(id);
+}
+
 export default function Index({
   leagueList,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -22,7 +26,7 @@ export default function Index({
           <HeroBannerCard />
           <LeagueSearchToolCard />
         </CardRowLayout>
-        <GameSelectorCard />
+        <GameSelectorCard onClick={test} />
         <LeagueListArea leagueList={leagueList} />
       </GlobalLayout>
     </>
@@ -34,7 +38,7 @@ export async function getStaticProps() {
     .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`, {
       params: {
         page: 1,
-        limit: 12,
+        limit: 24,
       },
     })
     .then((response) => {

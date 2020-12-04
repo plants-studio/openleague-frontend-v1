@@ -6,7 +6,6 @@ import LeagueDetailArea from '../../components/area/LeagueDetailArea';
 import GlobalLayout from '../../components/templates/GlobalLayout';
 
 export default function League({ leagueDetail }) {
-  const [showChild, setShowChild] = useState(false);
   const router = useRouter();
 
   // If the page is not yet generated, this will be displayed
@@ -18,13 +17,7 @@ export default function League({ leagueDetail }) {
   // Wait until after client-side hydration to show
   useEffect(() => {
     console.log('mount!');
-    setShowChild(true);
   }, []);
-
-  if (!showChild) {
-    // TODO 로딩중이라는 글로벌 플레이스홀더 만들기
-    return <span>로딩중입니다</span>;
-  }
 
   return (
     <>
@@ -45,6 +38,7 @@ export default function League({ leagueDetail }) {
 
 // This function gets called at build time
 export async function getStaticPaths() {
+  /*
   const leagueList = await axios
     .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`, {
       params: {
@@ -63,7 +57,9 @@ export async function getStaticPaths() {
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { paths, fallback: true };
+
+  return { paths, fallback: true };  */
+  return { paths: [], fallback: true };
 }
 
 export async function getStaticProps({ params }) {

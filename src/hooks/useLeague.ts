@@ -3,13 +3,11 @@ import Cookies from 'js-cookie';
 import { useState } from 'react';
 import Compressor from 'compressorjs';
 
-export default function useCreateLeague() {
+export default function useLeague() {
   const CCreateRequest = async (leagueData) => {
     if (!leagueData.thumbnail) {
       console.log('no file!');
     }
-
-    // TODO 어느정도 이상 크기가 넘어가면 퀄리티 조정 + 해상도 조정
     try {
       new Compressor(leagueData.thumbnail, {
         quality: 1,
@@ -37,6 +35,8 @@ export default function useCreateLeague() {
       console.log('error!');
     }
   };
+
+  const CSortByGame = async (game: string) => {};
 
   return {
     CCreateRequest,
