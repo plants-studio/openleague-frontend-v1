@@ -80,6 +80,7 @@ const GameSelectorCard = () => {
                       width="100%"
                       height="1"
                       imagePath={game.imagePath}
+                      quality={40}
                     />
                   </div>
                 </div>

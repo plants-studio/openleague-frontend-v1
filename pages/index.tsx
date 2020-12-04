@@ -14,18 +14,6 @@ import { useRouter } from 'next/router';
 export default function Index({
   leagueList,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter();
-  const [accessToken, setAccessToken] = useState(null);
-
-  const [UserName, setUserName] = useState('');
-
-  useEffect(() => {
-    if (Cookies.get('accessToken') !== null && Cookies.get('name') !== null) {
-      setUserName(Cookies.get('name'));
-      setAccessToken(Cookies.get('accessToken'));
-    }
-  }, []);
-
   return (
     <>
       <GlobalLayout>

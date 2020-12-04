@@ -48,6 +48,7 @@ const LeaguePreviewCard = ({
             loadMode="lazy"
             quality={100}
           ></StaticImageWrapper>
+          {/* TODO quality 조절해서 넣기*/}
         </div>
         <div className={style.contentArea}>
           <div className={style.headerArea}>

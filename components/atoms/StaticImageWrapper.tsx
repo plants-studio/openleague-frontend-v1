@@ -30,7 +30,7 @@ const StaticImageWrapper = ({
 
   return (
     <>
-      {isLoad ? <h1>로딩중</h1> : <h2>다됨</h2>}
+      {isLoad ? <h1>로딩중</h1> : <></>}
       <div
         className={style.imageWrapper}
         style={{
