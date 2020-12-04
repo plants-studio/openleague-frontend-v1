@@ -47,7 +47,8 @@ const LeagueDetailActionCard = ({
           themeType="primary"
           onClick={() => {
             router.push({
-              pathname: '/create-teams',
+              pathname: '/openleague/[_id]/create-team',
+              query: { _id: leagueId },
             });
           }}
         >

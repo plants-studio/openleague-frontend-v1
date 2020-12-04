@@ -31,7 +31,11 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
     <div className={style.wrapper}>
       <CardGroup>
         <UtilityBarCard>
-          {userId === leagueDetail.host ? <h1>호스트입니다</h1> : <></>}
+          {userId === leagueDetail.host ? (
+            <Button themeType="tertiary">대회 수정하기 </Button>
+          ) : (
+            <></>
+          )}
         </UtilityBarCard>
         <Card>
           <div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'plants-ui';
 import useUser from './../../src/hooks/useUser';
-import TextInput from '../atoms/CustomInput';
+import CustomInput from '../atoms/CustomInput';
 import { useRouter } from 'next/router';
 import StaticImageWrapper from '../atoms/StaticImageWrapper';
 import style from './SigninCard.module.scss';
@@ -39,15 +39,15 @@ const SigninCard = () => {
           width="100%"
           imagePath="/images/logo.png"
         />
-        <TextInput
+        <CustomInput
           type="text"
           name="email"
           placeholder="이메일"
           width="100%"
           onChange={inputAccount}
-        ></TextInput>
+        ></CustomInput>
         <br />
-        <TextInput
+        <CustomInput
           type="password"
           name="password"
           placeholder="비밀번호"

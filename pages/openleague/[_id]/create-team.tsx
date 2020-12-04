@@ -1,5 +1,5 @@
 import React from 'react';
-import GlobalLayout from '../../components/templates/GlobalLayout';
+import GlobalLayout from '../../../components/templates/GlobalLayout';
 
 export default function CreateLeague() {
   return (

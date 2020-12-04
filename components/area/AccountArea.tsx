@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import useUser from '../../src/hooks/useUser';
 import { IconButton } from 'plants-ui';
 import StaticImageWrapper from '../atoms/StaticImageWrapper';
+import { route } from 'next/dist/next-server/server/router';
 
 const AccountArea = () => {
   const {
@@ -26,6 +27,7 @@ const AccountArea = () => {
                 icon="powerOffSolid"
                 size="3.5rem"
                 onClick={() => {
+                  router.push('/');
                   CAuthLogout();
                 }}
               />
