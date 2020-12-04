@@ -3,7 +3,12 @@ import { start } from 'repl';
 import LeaguePreviewCard from './../cards/LeaguePreviewCard';
 import style from './LeagueListArea.module.scss';
 import { useRouter } from 'next/router';
-import { getDeadline, getLeagueSchedule } from '../../src/utils/league';
+import {
+  getDeadline,
+  getLeagueSchedule,
+  getPercentage,
+  getPlaceType,
+} from '../../src/utils/league';
 
 interface IProps {
   leagueList: any[];
@@ -65,19 +70,6 @@ const LeagueListArea = ({ leagueList }: IProps) => {
       </button>
     </>
   );
-};
-
-const getPercentage = (
-  applicant: number,
-  teamReqMemCnt: number,
-  teamMin: number,
-) => {
-  return (applicant / (teamReqMemCnt * teamMin)) * 100;
-};
-
-const getPlaceType = (placeType: string) => {
-  if (placeType === 'online') return '온라인';
-  else return '오프라인';
 };
 
 export default LeagueListArea;

@@ -33,3 +33,16 @@ export const getLeagueSchedule = (
     return schedule;
   }
 };
+
+export const getPercentage = (
+  applicant: number,
+  teamReqMemCnt: number,
+  teamMin: number,
+) => {
+  return (applicant / (teamReqMemCnt * teamMin)) * 100;
+};
+
+export const getPlaceType = (placeType: string) => {
+  if (placeType === 'online') return '온라인';
+  else return '오프라인';
+};
