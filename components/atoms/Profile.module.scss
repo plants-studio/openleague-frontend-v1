@@ -1,0 +1,33 @@
+.rowmode {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: bold;
+
+  &__textarea {
+    margin-left: 1rem;
+  }
+
+  &__profileimage {
+    border-radius: 100px;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  &__username {
+    color: black;
+  }
+
+  &__usercode {
+    color: rgb(192, 192, 192);
+  }
+
+  &__type {
+    display: inline-block;
+    margin-top: 0.25rem;
+    font-weight: 400;
+    color: rgb(192, 192, 192);
+  }
+}

@@ -1,20 +1,29 @@
-import { Card, ContentType, Header } from 'plants-ui';
-import React from 'react';
+import { Button, Card, ContentType, Header } from 'plants-ui';
+import React, { useEffect } from 'react';
 import DividerLine from '../atoms/DividerLine';
 import { ReactComponent as Stopwatch } from '../../public/icons/stopwatch-sharp.svg';
 import style from './LeagueDetailActionCard.module.scss';
+import Profile from '../atoms/Profile';
+import { useRouter } from 'next/router';
 
 interface IProps {
   title: string;
   applicationDeadline: number;
   width: string;
+  host: string;
+  status: string;
+  leagueId: string;
 }
 
 const LeagueDetailActionCard = ({
   title,
   applicationDeadline,
   width,
+  host,
+  status,
+  leagueId,
 }: IProps) => {
+  const router = useRouter();
   return (
     <Card cardTitle="대회 신청" width={width}>
       <div>
@@ -29,7 +38,23 @@ const LeagueDetailActionCard = ({
         </div>
       </div>
       <DividerLine margin="1rem" />
-      <div>하하</div>
+      <div>
+        <Profile mode="rowmMode" id={host} rowModeText="주최자" />
+      </div>
+      <DividerLine margin="1rem" />
+      <div className={style.buttonarea}>
+        <Button
+          themeType="primary"
+          onClick={() => {
+            router.push({
+              pathname: '/create-teams',
+            });
+          }}
+        >
+          팀 생성
+        </Button>
+        <Button themeType="secondary">팀 참여</Button>
+      </div>
     </Card>
   );
 };

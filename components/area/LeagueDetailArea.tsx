@@ -72,6 +72,9 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
           applicationDeadline={getFormattedApplicationDeadline(
             leagueDetail.applicationDeadline,
           )}
+          host={leagueDetail.host}
+          status={leagueDetail.status}
+          leagueId={leagueDetail._id}
         ></LeagueDetailActionCard>
       </div>
       <div className={style.mockarea}></div>
