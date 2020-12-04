@@ -13,6 +13,8 @@ import dynamic from 'next/dynamic';
 import { ViewerProps } from '@toast-ui/react-editor';
 import DividerLine from '../atoms/DividerLine';
 import LeagueBasicInformation from '../cards/LeagueBasicInformation';
+import UtilityBarCard from '../cards/UtilityBarCard';
+import useUser from '../../src/hooks/useUser';
 interface IProps {
   leagueDetail: any;
 }
@@ -24,19 +26,13 @@ const Viewer = dynamic<ViewerProps>(
 
 const LeagueDetailArea = ({ leagueDetail }: IProps) => {
   const router = useRouter();
+  const { userId } = useUser();
   return (
     <div className={style.wrapper}>
       <CardGroup>
-        <Card>
-          <Button
-            themeType="secondary"
-            onClick={() => {
-              router.back();
-            }}
-          >
-            뒤로가기
-          </Button>
-        </Card>
+        <UtilityBarCard>
+          {userId === leagueDetail.host ? <h1>호스트입니다</h1> : <></>}
+        </UtilityBarCard>
         <Card>
           <div>
             <img

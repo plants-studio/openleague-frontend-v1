@@ -9,6 +9,7 @@ import RadioInput from '../../components/atoms/RadioInput';
 import CardRowLayout from '../templates/CardRowLayout';
 import style from './CreateLeagueWrapper.module.scss';
 import { useRouter } from 'next/router';
+import UtilityBarCard from '../cards/UtilityBarCard';
 
 const CreateLeagueWrapper = () => {
   const router = useRouter();
@@ -72,16 +73,7 @@ const CreateLeagueWrapper = () => {
 
   return (
     <div className={style.wrapper}>
-      <Card>
-        <Button
-          themeType="secondary"
-          onClick={() => {
-            router.back();
-          }}
-        >
-          뒤로가기
-        </Button>
-      </Card>
+      <UtilityBarCard margin="0 0 0.5rem 0"></UtilityBarCard>
       <CardRowLayout>
         <Card width="100%" cardTitle="기본 정보">
           <CustomInput
@@ -244,13 +236,13 @@ const CreateLeagueWrapper = () => {
         </Card>
       </CardRowLayout>
 
-      <Card cardTitle="대회 소개">
+      <Card cardTitle="대회 소개" margin="0.5rem 0">
         <WysiwygEditor onChange={handleIntroduce}></WysiwygEditor>
       </Card>
-      <Card cardTitle="대회 규칙">
+      <Card cardTitle="대회 규칙" margin="0.5rem 0">
         <WysiwygEditor onChange={handleRule}></WysiwygEditor>
       </Card>
-      <Card>
+      <Card margin="0.5rem 0 0 0">
         <div className={style.buttonarea}>
           <Button
             themeType="primary"
