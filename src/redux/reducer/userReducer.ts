@@ -26,6 +26,8 @@ export const loginSuccess = (diff: {
   userName: string;
   userCode: string;
   userProfileImage: string;
+  userId: string;
+  isAdmin: boolean;
 }) => ({ type: LOGIN_SUCCESS, payload: diff });
 export const loginFailure = () => ({ type: LOGIN_FAILURE });
 export const reloadRequest = () => ({ type: RELOAD_REQUEST });
@@ -36,6 +38,8 @@ export const refreshSuccess = (diff: {
   userName: string;
   userCode: string;
   userProfileImage: string;
+  userId: string;
+  isAdmin: boolean;
 }) => ({ type: REFRESH_SUCCESS, payload: diff });
 export const refreshFailure = () => ({ type: REFRESH_FAILURE });
 export const signupRequest = (diff: DefaultSignupProps) => ({
@@ -68,6 +72,8 @@ type UserState = {
   userName: string;
   userCode: string;
   userProfileImage: string;
+  userId: string;
+  isAdmin: boolean;
 };
 
 // NOTE STORE INITIALIZE
@@ -78,6 +84,8 @@ const initialState: UserState = {
   userName: '',
   userCode: '',
   userProfileImage: '',
+  userId: '',
+  isAdmin: false,
 };
 
 // NOTE REDUCER
@@ -93,6 +101,8 @@ function user(state = initialState, action: UserAction) {
         userName: action.payload.userName,
         userCode: action.payload.userCode,
         userProfileImage: action.payload.userProfileImage,
+        userId: action.payload.userId,
+        isAdmin: action.payload.isAdmin,
       };
     case LOGIN_FAILURE:
       return state;
@@ -104,6 +114,8 @@ function user(state = initialState, action: UserAction) {
         userName: '',
         userCode: '',
         userProfileImage: '',
+        userId: '',
+        isAdmin: '',
       };
     case RELOAD_REQUEST:
       return { ...state, isLoadDone: false };
@@ -119,6 +131,8 @@ function user(state = initialState, action: UserAction) {
         userName: action.payload.userName,
         userCode: action.payload.userCode,
         userProfileImage: action.payload.userProfileImage,
+        userId: action.payload.userId,
+        isAdmin: action.payload.isAdmin,
       };
     case REFRESH_FAILURE:
       return { ...state, isLogin: false, isLoadDone: true };

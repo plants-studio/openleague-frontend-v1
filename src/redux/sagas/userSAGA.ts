@@ -47,6 +47,8 @@ function* loginRequestSaga(action) {
         userName,
         userCode,
         userProfileImage,
+        userId,
+        isAdmin,
       } = getDecodedAccessTokenData();
       yield put({
         type: LOGIN_SUCCESS,
@@ -55,6 +57,8 @@ function* loginRequestSaga(action) {
           userName: userName,
           userCode: userCode,
           userProfileImage: userProfileImage,
+          userId: userId,
+          isAdmin: isAdmin,
         },
       });
     }
@@ -76,7 +80,6 @@ function* logoutSaga(action) {
 function* reloadSaga(action) {
   const refreshToken = yield call(searchRefreshToken);
   if (refreshToken) {
-    console.log('refresh start!');
     yield put({ type: REFRESH_REQUEST });
   } else {
     yield put({ type: RELOAD_FAILURE });
@@ -96,6 +99,8 @@ function* refreshRequestSaga(action) {
         userName,
         userCode,
         userProfileImage,
+        userId,
+        isAdmin,
       } = getDecodedAccessTokenData();
       yield put({
         type: REFRESH_SUCCESS,
@@ -104,6 +109,8 @@ function* refreshRequestSaga(action) {
           userName: userName,
           userCode: userCode,
           userProfileImage: userProfileImage,
+          userId: userId,
+          isAdmin: isAdmin,
         },
       });
     }

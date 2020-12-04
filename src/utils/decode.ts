@@ -7,6 +7,8 @@ export const getDecodedAccessTokenData = () => {
       name: string;
       email: string;
       profile: string;
+      _id: string;
+      admin: string;
     };
   } = jwtDecode(Cookies.get('accessToken'));
   const splitedName = decoded.user.name.split('#');
@@ -15,5 +17,7 @@ export const getDecodedAccessTokenData = () => {
     userName: splitedName[0],
     userCode: splitedName[1],
     userProfileImage: decoded.user.profile,
+    userId: decoded.user._id,
+    isAdmin: decoded.user.admin,
   };
 };

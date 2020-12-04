@@ -16,6 +16,8 @@ export default function useUser() {
   const email = useSelector((state: RootState) => state.user.email);
   const userName = useSelector((state: RootState) => state.user.userName);
   const userCode = useSelector((state: RootState) => state.user.userCode);
+  const userId = useSelector((state: RootState) => state.user.userId);
+  const isAdmin = useSelector((state: RootState) => state.user.isAdmin);
   const userProfileImage = useSelector(
     (state: RootState) => state.user.userProfileImage,
   );
@@ -40,6 +42,8 @@ export default function useUser() {
     userName,
     userCode,
     userProfileImage,
+    userId,
+    isAdmin,
     CLoginRequest,
     CSignupRequest,
     CAuthLogout,
