@@ -54,6 +54,11 @@ const SigninCard = () => {
           width="100%"
           margin="0.5rem 0 0 0"
           onChange={inputAccount}
+          onKeyPress={(e) => {
+            if (e.key == 'Enter') {
+              CLoginRequest(account);
+            }
+          }}
         />
         <br />
         <div className={style.buttonarea}>
