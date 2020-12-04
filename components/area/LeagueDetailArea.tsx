@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Button, Card } from 'plants-ui';
-import React from 'react';
+import React, { useEffect } from 'react';
 import LeagueDetailActionCard from '../cards/LeagueDetailActionCard';
 import CardGroup from '../utility/CardGroup';
 import style from './LeagueDetailArea.module.scss';
@@ -27,12 +27,42 @@ const Viewer = dynamic<ViewerProps>(
 const LeagueDetailArea = ({ leagueDetail }: IProps) => {
   const router = useRouter();
   const { userId } = useUser();
+
+  useEffect(() => {
+    if (userId === leagueDetail._id) {
+      router.prefetch('/openleague/[_id]/modify-league');
+      router.prefetch('/openleague/[_id]/manage-league');
+    }
+  }, []);
   return (
     <div className={style.wrapper}>
       <CardGroup>
         <UtilityBarCard>
           {userId === leagueDetail.host ? (
-            <Button themeType="tertiary">대회 수정하기 </Button>
+            <>
+              <Button
+                themeType="secondary"
+                onClick={() => {
+                  router.push({
+                    pathname: '/openleague/[_id]/modify-league',
+                    query: { _id: leagueDetail._id },
+                  });
+                }}
+              >
+                대회정보 수정
+              </Button>
+              <Button
+                themeType="secondary"
+                onClick={() => {
+                  router.push({
+                    pathname: '/openleague/[_id]/manage-league',
+                    query: { _id: leagueDetail._id },
+                  });
+                }}
+              >
+                대회 관리{' '}
+              </Button>
+            </>
           ) : (
             <></>
           )}
