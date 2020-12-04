@@ -88,6 +88,8 @@ function* refreshRequestSaga(action) {
   try {
     const response = yield call(AauthRefresh);
     if (response.status === 200) {
+      yield call(AauthRevoke, 'accessToken');
+      yield call(AauthRevoke, 'refreshToken');
       saveTokensToCookie(response.data.accessToken, response.data.refreshToken);
       const {
         email,
