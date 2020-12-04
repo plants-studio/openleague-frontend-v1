@@ -1,4 +1,16 @@
-export const getDeadline = (applicationDeadline: number) => {
+export const getMonthByString = (date: string) => {
+  const newDate = date.split('-');
+  return Number(newDate[1]);
+};
+
+export const getDayByString = (date: string) => {
+  const newDate = date.split('-');
+  return Number(newDate[2]);
+};
+
+export const getFormattedApplicationDeadline = (
+  applicationDeadline: number,
+) => {
   var diffDate_1 = new Date(applicationDeadline);
   var diffDate_2 = new Date();
 
@@ -19,22 +31,34 @@ export const getDeadline = (applicationDeadline: number) => {
 };
 
 // TODO 달이나 일 앞에 붙은 0 제거하기
-export const getLeagueSchedule = (
+export const getFormattedLeagueSchedule = (
   leagueStartDay: string,
   leagueEndDay: string,
 ) => {
   const startDayArray = leagueStartDay.split('-');
   const endDayArray = leagueEndDay.split('-');
   if (leagueStartDay === leagueEndDay) {
-    const schedule = startDayArray[1] + '월' + startDayArray[2] + '일';
+    const schedule =
+      getMonthByString(leagueStartDay) +
+      '월' +
+      getDayByString(leagueEndDay) +
+      '일';
     return schedule;
   } else {
-    const schedule = `${startDayArray[1]}월 ${startDayArray[2]}일 ~ ${endDayArray[1]}월 ${endDayArray[2]}일`;
+    const schedule =
+      getMonthByString(leagueStartDay) +
+      '월' +
+      getDayByString(leagueStartDay) +
+      '일 ~  ' +
+      getMonthByString(leagueEndDay) +
+      '월' +
+      getDayByString(leagueEndDay) +
+      '일';
     return schedule;
   }
 };
 
-export const getPercentage = (
+export const getApplicationPercentage = (
   applicant: number,
   teamReqMemCnt: number,
   teamMin: number,

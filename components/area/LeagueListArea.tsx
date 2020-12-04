@@ -4,9 +4,9 @@ import LeaguePreviewCard from './../cards/LeaguePreviewCard';
 import style from './LeagueListArea.module.scss';
 import { useRouter } from 'next/router';
 import {
-  getDeadline,
-  getLeagueSchedule,
-  getPercentage,
+  getFormattedApplicationDeadline,
+  getFormattedLeagueSchedule,
+  getApplicationPercentage,
   getPlaceType,
 } from '../../src/utils/league';
 
@@ -36,12 +36,14 @@ const LeagueListArea = ({ leagueList }: IProps) => {
             title={league.title}
             placeType={getPlaceType(league.placeType)}
             teamReqMemCnt={league.teamReqMemCnt}
-            leagueSchedule={getLeagueSchedule(
+            leagueSchedule={getFormattedLeagueSchedule(
               league.leagueStartDay,
               league.leagueEndDay,
             )}
-            applicationDeadline={getDeadline(league.applicationDeadline)}
-            percentage={getPercentage(
+            applicationDeadline={getFormattedApplicationDeadline(
+              league.applicationDeadline,
+            )}
+            percentage={getApplicationPercentage(
               league.applicant,
               league.teamReqMemCnt,
               league.teamMin,

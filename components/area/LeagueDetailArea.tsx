@@ -4,7 +4,10 @@ import React from 'react';
 import LeagueDetailActionCard from '../cards/LeagueDetailActionCard';
 import CardGroup from '../utility/CardGroup';
 import style from './LeagueDetailArea.module.scss';
-import { getDeadline } from '../../src/utils/league';
+import {
+  getFormattedApplicationDeadline,
+  getFormattedLeagueSchedule,
+} from '../../src/utils/league';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import dynamic from 'next/dynamic';
 import { ViewerProps } from '@toast-ui/react-editor';
@@ -50,8 +53,11 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
         <LeagueBasicInformation
           game={leagueDetail.game}
           placeType={leagueDetail.placeType}
-          leagueSchedule={'22'}
-          applicationDeadline={'11'}
+          leagueSchedule={getFormattedLeagueSchedule(
+            leagueDetail.leagueStartDay,
+            leagueDetail.leagueEndDay,
+          )}
+          applicationDeadline={leagueDetail.applicationDeadline}
           location={leagueDetail.location}
           discordLink={leagueDetail.discordLink}
         />
@@ -60,7 +66,9 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
         <LeagueDetailActionCard
           width="22rem"
           title={leagueDetail.title}
-          applicationDeadline={getDeadline(leagueDetail.applicationDeadline)}
+          applicationDeadline={getFormattedApplicationDeadline(
+            leagueDetail.applicationDeadline,
+          )}
         ></LeagueDetailActionCard>
       </div>
     </div>
