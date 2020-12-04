@@ -29,7 +29,7 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
   const { userId } = useUser();
 
   useEffect(() => {
-    if (userId === leagueDetail._id) {
+    if (userId === leagueDetail.host) {
       console.log('Prefetching : modify-league, manage-league');
       router.prefetch(
         '/openleague/[_id]/modify-league',
