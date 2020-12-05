@@ -10,6 +10,7 @@ interface IProps {
   width?: string;
   maxLength?: number;
   margin?: string;
+  value?: string | number;
 }
 
 const CustomInput = ({
@@ -21,6 +22,7 @@ const CustomInput = ({
   width,
   maxLength,
   margin,
+  value,
 }: IProps) => {
   return (
     <input
@@ -32,6 +34,7 @@ const CustomInput = ({
       onChange={onChange}
       maxLength={maxLength}
       onKeyPress={onKeyPress}
+      value={value}
     ></input>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { start } from 'repl';
 import LeaguePreviewCard from './../cards/LeaguePreviewCard';
 import style from './LeagueListArea.module.scss';
@@ -26,6 +26,9 @@ const LeagueCode = {
 // TODO map 방식으로 동작되는 리스트 만들기
 const LeagueListArea = ({ leagueList }: IProps) => {
   const router = useRouter();
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className={style.container}>

@@ -121,7 +121,6 @@ function* refreshRequestSaga(action) {
 
 // NOTE SAGA FUNCTION
 function* signupRequestSaga(action) {
-  console.log('SAGA: signupRequest');
   try {
     const response = yield call(
       AauthSignup,

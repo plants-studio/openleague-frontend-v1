@@ -25,38 +25,40 @@ const LeagueDetailActionCard = ({
 }: IProps) => {
   const router = useRouter();
   return (
-    <Card cardTitle="대회 신청" width={width}>
-      <div>
-        <Header size="small">{title}</Header>
-        <div className={style.deadlinearea}>
-          <Stopwatch
-            className={style.deadlinearea__icon}
-            height="0.9rem"
-            fill="#f23c4c"
-          />
-          <ContentType>접수 마감까지 {applicationDeadline}일</ContentType>
+    <div className={style.fixedarea}>
+      <Card cardTitle="대회 신청" width={width}>
+        <div>
+          <Header size="small">{title}</Header>
+          <div className={style.deadlinearea}>
+            <Stopwatch
+              className={style.deadlinearea__icon}
+              height="0.9rem"
+              fill="#f23c4c"
+            />
+            <ContentType>접수 마감까지 {applicationDeadline}일</ContentType>
+          </div>
         </div>
-      </div>
-      <DividerLine margin="1rem" />
-      <div>
-        <Profile mode="rowmMode" id={host} rowModeText="주최자" />
-      </div>
-      <DividerLine margin="1rem" />
-      <div className={style.buttonarea}>
-        <Button
-          themeType="primary"
-          onClick={() => {
-            router.push({
-              pathname: '/openleague/[_id]/create-team',
-              query: { _id: leagueId },
-            });
-          }}
-        >
-          팀 생성
-        </Button>
-        <Button themeType="secondary">팀 참여</Button>
-      </div>
-    </Card>
+        <DividerLine margin="1rem" />
+        <div>
+          <Profile mode="rowmMode" id={host} rowModeText="주최자" />
+        </div>
+        <DividerLine margin="1rem" />
+        <div className={style.buttonarea}>
+          <Button
+            themeType="primary"
+            onClick={() => {
+              router.push({
+                pathname: '/openleague/[_id]/create-team',
+                query: { _id: leagueId },
+              });
+            }}
+          >
+            팀 생성
+          </Button>
+          <Button themeType="secondary">팀 참여</Button>
+        </div>
+      </Card>
+    </div>
   );
 };
 

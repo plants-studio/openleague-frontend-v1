@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useLeague from '../../src/hooks/useLeague';
 import { Button, Card } from 'plants-ui';
 import WysiwygEditor from '../../components/utility/WysiwygEditor';
@@ -10,10 +10,15 @@ import CardRowLayout from '../templates/CardRowLayout';
 import style from './CreateLeagueWrapper.module.scss';
 import { useRouter } from 'next/router';
 import UtilityBarCard from '../cards/UtilityBarCard';
+import axios from 'axios';
 
-const CreateLeagueWrapper = () => {
+// 새로고침해도 데이터가 들어와있도록 하기
+const ModifyLeagueWrapper = () => {
   const router = useRouter();
-  const { CCreateRequest } = useLeague();
+  const { CEditRequest } = useLeague();
+  const [isLoad, setIsLoad] = useState(false);
+  const [isImageChange, setIsImageChange] = useState(false);
+  const [leagueId, setLeagueId] = useState('');
   const [leagueData, setLeagueData] = useState({
     title: '',
     applicationDeadline: '',
@@ -29,7 +34,40 @@ const CreateLeagueWrapper = () => {
     placeType: '',
     discordLink: '',
     location: '',
+    status: '',
   });
+
+  useEffect(() => {
+    console.log('run useEffect');
+    const leagueId = router.query._id;
+    const fetchLeague = async () => {
+      await axios
+        .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${leagueId}`, {})
+        .then((response) => {
+          const data = response.data;
+          setLeagueData({
+            ...leagueData,
+            title: data.title,
+            applicationDeadline: data.applicationDeadline,
+            leagueStartDay: data.leagueStartDay,
+            leagueEndDay: data.leagueEndDay,
+            introduce: data.introduce,
+            rule: data.rule,
+            thumbnail: data.thumbnail,
+            game: data.game,
+            teamMin: data.teamMin,
+            teamMax: data.teamMax,
+            teamReqMemCnt: data.teamReqMemCnt,
+            placeType: data.placeType,
+            discordLink: data.discordLink,
+            location: data.location,
+            status: data.status,
+          });
+          setIsLoad(true);
+        });
+    };
+    fetchLeague();
+  }, []);
 
   const handleIntroduce = (e) => {
     setLeagueData({
@@ -57,19 +95,21 @@ const CreateLeagueWrapper = () => {
   };
 
   const handleText = (e) => {
-    console.log(e);
     setLeagueData({ ...leagueData, [e.target.name]: e.target.value });
   };
 
   const handleNumber = (e) => {
-    console.log(e);
     setLeagueData({ ...leagueData, [e.target.name]: e.target.valueAsNumber });
   };
 
   const setFile = (e) => {
-    console.log(e.target.files[0]);
+    setIsImageChange(true);
     setLeagueData({ ...leagueData, thumbnail: e.target.files[0] });
   };
+
+  if (!isLoad) {
+    return <h1>로딩중</h1>;
+  }
 
   return (
     <div className={style.wrapper}>
@@ -85,11 +125,13 @@ const CreateLeagueWrapper = () => {
             }}
             width="100%"
             maxLength={40}
+            value={leagueData.title}
           ></CustomInput>
           <div className={style.datearea}>
             <div className={style.dateitem}>
               <span className={style.datearea__name}>신청 마감일</span>
               <input
+                value={leagueData.applicationDeadline}
                 className={style.dateinput}
                 type="date"
                 name="applicationDeadline"
@@ -99,6 +141,7 @@ const CreateLeagueWrapper = () => {
             <div className={style.dateitem}>
               <span className={style.datearea__name}>대회 시작일</span>
               <input
+                value={leagueData.leagueStartDay}
                 className={style.dateinput}
                 type="date"
                 name="leagueStartDay"
@@ -108,6 +151,7 @@ const CreateLeagueWrapper = () => {
             <div className={style.dateitem}>
               <span className={style.datearea__name}>대회 종료일</span>
               <input
+                value={leagueData.leagueEndDay}
                 className={style.dateinput}
                 type="date"
                 name="leagueEndDay"
@@ -125,6 +169,7 @@ const CreateLeagueWrapper = () => {
             onChange={(e) => {
               handleText(e);
             }}
+            value={leagueData.game}
           >
             <option value="League Of Legend">리그오브레전드</option>
             <option value="Overwatch">오버워치</option>
@@ -135,14 +180,14 @@ const CreateLeagueWrapper = () => {
           </select>
           <div className={style.uploadarea}>
             <label htmlFor="file-upload" className={style.filebutton}>
-              업로드
+              재업로드
             </label>
             <input
               id="file-upload"
               type="file"
               name="thumbnail"
               onChange={setFile.bind(this)}
-              placeholder="이미지  업로드"
+              placeholder="이미지  재업로드"
               className={style.inputfiletag}
             />
           </div>
@@ -162,6 +207,7 @@ const CreateLeagueWrapper = () => {
             name="teamReqMemCnt"
             onChange={handleNumber}
             placeholder="팀 인원(팀원의 수)"
+            value={leagueData.teamReqMemCnt}
           ></CustomInput>
           <CustomInput
             width="100%"
@@ -170,6 +216,7 @@ const CreateLeagueWrapper = () => {
             name="teamMin"
             onChange={handleNumber}
             placeholder="대회 운영이 가능한 최소 팀 수"
+            value={leagueData.teamMin}
           ></CustomInput>
           <CustomInput
             width="100%"
@@ -178,6 +225,7 @@ const CreateLeagueWrapper = () => {
             name="teamMax"
             onChange={handleNumber}
             placeholder="대회 운영 가능한 최대 팀 수"
+            value={leagueData.teamMax}
           ></CustomInput>
         </Card>
         <Card cardTitle="대회 방법" width="100%">
@@ -212,6 +260,7 @@ const CreateLeagueWrapper = () => {
                   name="discordLink"
                   onChange={handleText}
                   placeholder="대회 진행에 사용할 디스코드 서버 초대링크"
+                  value={leagueData.discordLink}
                 ></CustomInput>
                 <span className={style.explaintext}>
                   초대하기-초대 링크 편집하기 에서 잔여 유효기간과
@@ -226,6 +275,7 @@ const CreateLeagueWrapper = () => {
                   name="location"
                   onChange={handleText}
                   placeholder="대회 장소"
+                  value={leagueData.location}
                 ></CustomInput>
                 <span className={style.explaintext}>
                   대회를 개최할 곳의 상세한 주소를 작성해주세요!
@@ -237,20 +287,28 @@ const CreateLeagueWrapper = () => {
       </CardRowLayout>
 
       <Card cardTitle="대회 소개" margin="0.5rem 0">
-        <WysiwygEditor onChange={handleIntroduce}></WysiwygEditor>
+        <WysiwygEditor
+          initialValue={leagueData.introduce}
+          onChange={handleIntroduce}
+        ></WysiwygEditor>
       </Card>
       <Card cardTitle="대회 규칙" margin="0.5rem 0">
-        <WysiwygEditor onChange={handleRule}></WysiwygEditor>
+        <WysiwygEditor
+          initialValue={leagueData.rule}
+          onChange={handleRule}
+        ></WysiwygEditor>
       </Card>
       <Card margin="0.5rem 0 0 0">
         <div className={style.buttonarea}>
           <Button
             themeType="primary"
             onClick={() => {
-              CCreateRequest(leagueData);
+              console.log(leagueData);
+              console.log('-----');
+              CEditRequest(leagueData, router.query._id, isImageChange);
             }}
           >
-            대회 생성하기
+            대회 수정하기
           </Button>
         </div>
       </Card>
@@ -258,4 +316,4 @@ const CreateLeagueWrapper = () => {
   );
 };
 
-export default CreateLeagueWrapper;
+export default ModifyLeagueWrapper;

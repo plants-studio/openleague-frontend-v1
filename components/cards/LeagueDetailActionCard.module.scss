@@ -15,3 +15,10 @@
   display: flex;
   gap: 0.5rem;
 }
+
+.fixedarea {
+  z-index: 50;
+  position: fixed;
+  right: 2rem;
+  left: auto;
+}

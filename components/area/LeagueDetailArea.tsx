@@ -32,13 +32,17 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
     if (userId === leagueDetail.host) {
       console.log('Prefetching : modify-league, manage-league');
       router.prefetch(
-        '/openleague/[_id]/modify-league',
-        `/openleague/${leagueDetail._id}/modify-league`,
+        '/openleague/[_id]/manage-league',
+        `/openleague${leagueDetail._id}/manage-league`,
       );
       router.prefetch(
-        '/openleague/[_id]/manage-league',
-        `/openleague/${leagueDetail._id}/manage-league`,
+        '/openleague/[_id]/modify-league',
+        `/openleague${leagueDetail._id}/modify-league`,
       );
+    } else {
+      console.log('Fail to prefetch league management page');
+      console.log('userId : ' + userId);
+      console.log('userId : ' + leagueDetail.host);
     }
   }, []);
   return (
@@ -102,18 +106,16 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
           <Viewer initialValue={leagueDetail.rule} />
         </Card>
       </CardGroup>
-      <div className={style.fixedarea}>
-        <LeagueDetailActionCard
-          width="22rem"
-          title={leagueDetail.title}
-          applicationDeadline={getFormattedApplicationDeadline(
-            leagueDetail.applicationDeadline,
-          )}
-          host={leagueDetail.host}
-          status={leagueDetail.status}
-          leagueId={leagueDetail._id}
-        ></LeagueDetailActionCard>
-      </div>
+      <LeagueDetailActionCard
+        width="22rem"
+        title={leagueDetail.title}
+        applicationDeadline={getFormattedApplicationDeadline(
+          leagueDetail.applicationDeadline,
+        )}
+        host={leagueDetail.host}
+        status={leagueDetail.status}
+        leagueId={leagueDetail._id}
+      ></LeagueDetailActionCard>
       <div className={style.mockarea}></div>
     </div>
   );

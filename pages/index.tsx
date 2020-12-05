@@ -16,6 +16,8 @@ function test(id) {
   console.log(id);
 }
 
+// TODO 대회 게시물도 prefetch가 가능하도록 하기
+
 export default function Index({
   leagueList,
 }: InferGetStaticPropsType<typeof getStaticProps>) {

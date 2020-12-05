@@ -20,8 +20,6 @@ const Profile = ({ mode, id, rowModeText }: IProps) => {
       .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/${id}`)
       .then((response) => {
         if (response.status === 200) {
-          //setIsLoad(true);
-          console.log(response.data);
           setIsLoad(true);
           setImagePath(response.data.profile);
           setName(response.data.name.split('#')[0]);
