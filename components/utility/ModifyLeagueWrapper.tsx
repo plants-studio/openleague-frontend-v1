@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useLeague from '../../src/hooks/useLeague';
-import { Button, Card } from 'plants-ui';
+import { Button, Card, SubHeader } from 'plants-ui';
 import WysiwygEditor from '../../components/utility/WysiwygEditor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import 'codemirror/lib/codemirror.css';
@@ -113,7 +113,18 @@ const ModifyLeagueWrapper = () => {
 
   return (
     <div className={style.wrapper}>
-      <UtilityBarCard margin="0 0 0.5rem 0"></UtilityBarCard>
+      <UtilityBarCard margin="0 0 0.5rem 0">
+        <span
+          style={{
+            color: '#333',
+            fontWeight: 'bold',
+            fontSize: '0.875rem',
+            marginLeft: '1rem',
+          }}
+        >
+          수정 후 아래의 대회 수정하기 버튼을 눌러주세요!
+        </span>
+      </UtilityBarCard>
       <CardRowLayout>
         <Card width="100%" cardTitle="기본 정보">
           <CustomInput
