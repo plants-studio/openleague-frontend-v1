@@ -1,13 +1,38 @@
 import React from 'react';
-import LeagueDetailActionCard from '../../../components/cards/LeagueDetailActionCard';
+import axios from 'axios';
+import ManageLeagueArea from '../../../components/area/ManageLeagueArea';
 import GlobalLayout from '../../../components/templates/GlobalLayout';
-import CardGroup from '../../../components/utility/CardGroup';
-import CreateLeagueWrapper from '../../../components/utility/CreateLeagueWrapper';
+import LeagueDetailActionCard from '../../../components/cards/LeagueDetailActionCard';
+import { getFormattedApplicationDeadline } from '../../../src/utils/league';
 
-export default function ModifyLeague() {
+export default function ModifyLeague({ leagueDetail }) {
   return (
     <div>
-      <GlobalLayout>대회 관리</GlobalLayout>
+      <GlobalLayout>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <ManageLeagueArea />
+          <LeagueDetailActionCard
+            width="22rem"
+            title={leagueDetail.title}
+            applicationDeadline={getFormattedApplicationDeadline(
+              leagueDetail.applicationDeadline,
+            )}
+            host={leagueDetail.host}
+            status={leagueDetail.status}
+            leagueId={leagueDetail._id}
+          ></LeagueDetailActionCard>{' '}
+        </div>
+      </GlobalLayout>
     </div>
   );
+}
+
+export async function getServerSideProps({ params }) {
+  const leagueDetail = await axios
+    .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${params._id}`, {})
+    .then((response) => {
+      return response.data;
+    });
+
+  return { props: { leagueDetail } };
 }

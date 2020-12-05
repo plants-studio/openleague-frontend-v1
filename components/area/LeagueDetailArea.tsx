@@ -4,10 +4,7 @@ import React, { useEffect } from 'react';
 import LeagueDetailActionCard from '../cards/LeagueDetailActionCard';
 import CardGroup from '../utility/CardGroup';
 import style from './LeagueDetailArea.module.scss';
-import {
-  getFormattedApplicationDeadline,
-  getFormattedLeagueSchedule,
-} from '../../src/utils/league';
+import { getFormattedLeagueSchedule } from '../../src/utils/league';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import dynamic from 'next/dynamic';
 import { ViewerProps } from '@toast-ui/react-editor';
@@ -106,17 +103,6 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
           <Viewer initialValue={leagueDetail.rule} />
         </Card>
       </CardGroup>
-      <LeagueDetailActionCard
-        width="22rem"
-        title={leagueDetail.title}
-        applicationDeadline={getFormattedApplicationDeadline(
-          leagueDetail.applicationDeadline,
-        )}
-        host={leagueDetail.host}
-        status={leagueDetail.status}
-        leagueId={leagueDetail._id}
-      ></LeagueDetailActionCard>
-      <div className={style.mockarea}></div>
     </div>
   );
 };

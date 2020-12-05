@@ -3,7 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import LeagueDetailArea from '../../components/area/LeagueDetailArea';
+import LeagueDetailActionCard from '../../components/cards/LeagueDetailActionCard';
 import GlobalLayout from '../../components/templates/GlobalLayout';
+import { getFormattedApplicationDeadline } from '../../src/utils/league';
 
 export default function League({ leagueDetail }) {
   const router = useRouter();
@@ -29,7 +31,19 @@ export default function League({ leagueDetail }) {
         />
       </Head>
       <GlobalLayout>
-        <LeagueDetailArea leagueDetail={leagueDetail} />
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <LeagueDetailArea leagueDetail={leagueDetail} />
+          <LeagueDetailActionCard
+            width="22rem"
+            title={leagueDetail.title}
+            applicationDeadline={getFormattedApplicationDeadline(
+              leagueDetail.applicationDeadline,
+            )}
+            host={leagueDetail.host}
+            status={leagueDetail.status}
+            leagueId={leagueDetail._id}
+          ></LeagueDetailActionCard>
+        </div>
       </GlobalLayout>
     </>
   );
