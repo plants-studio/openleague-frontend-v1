@@ -4,6 +4,11 @@ import { useState } from 'react';
 import Compressor from 'compressorjs';
 
 export default function useLeague() {
+  const [status, setStatus] = useState({
+    isStart: false,
+    isDone: false,
+    code: 0,
+  });
   const CCreateRequest = async (leagueData) => {
     if (!leagueData.thumbnail) {
       console.log('no file!');
@@ -98,10 +103,40 @@ export default function useLeague() {
     );
   };
 
+  const CDeleteLeague = async (leagueId: string | string[]) => {
+    setStatus({ ...status, isStart: true, isDone: false });
+    await axios
+      .delete(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${leagueId}`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          setStatus({
+            ...status,
+            isStart: false,
+            isDone: true,
+            code: response.status,
+          });
+        }
+      })
+      .catch((error) => {
+        setStatus({
+          ...status,
+          isStart: false,
+          isDone: true,
+          code: error.response.status,
+        });
+      });
+  };
+
   return {
+    status,
     CCreateRequest,
     CEditRequest,
     CSortByGame,
     CGetLeague,
+    CDeleteLeague,
   };
 }

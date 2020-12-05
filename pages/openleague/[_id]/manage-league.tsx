@@ -10,7 +10,7 @@ export default function ModifyLeague({ leagueDetail }) {
     <div>
       <GlobalLayout>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <ManageLeagueArea />
+          <ManageLeagueArea leagueDetail={leagueDetail} />
           <LeagueDetailActionCard
             width="22rem"
             title={leagueDetail.title}

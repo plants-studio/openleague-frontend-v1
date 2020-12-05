@@ -6,10 +6,12 @@ import StaticImageWrapper from '../atoms/StaticImageWrapper';
 import style from './SignupCard.module.scss';
 import Modal from '../utility/Modal';
 import useSignup from '../../src/hooks/useSignup';
+import LoadingModalItem from '../area/LoadingModalItem';
+import { stat } from 'fs';
 
 // TODO 로그인 리퀘스트를 걸었을때 로딩중인 애니메이션이 뜨게 하기
 const SignupCard = () => {
-  const { isDone, CSignupRequest } = useSignup();
+  const { status, CSignupRequest } = useSignup();
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -35,7 +37,7 @@ const SignupCard = () => {
   };
   return (
     <Card width="25rem">
-      <div>
+      <>
         {modalVisible && (
           <Modal
             visible={modalVisible}
@@ -43,35 +45,27 @@ const SignupCard = () => {
             maskClosable={false}
             onClose={closeModal}
           >
-            <div className={style.modalitemwrapper}>
-              {isDone ? (
-                <>
-                  <StaticImageWrapper
-                    width="70%"
-                    OptWidth={1071}
-                    OptHeight={443}
-                    imagePath="/images/logo.png"
-                  />
-                  <span className={style.header}>계정이 만들어졌습니다!</span>
-                  <div className={style.textarea}>
-                    <span className={style.textarea__text}>
-                      아래 버튼을 눌러 로그인 페이지로 이동해 로그인하고
-                      서비스를 이용해주세요!
-                    </span>
-                  </div>
-                  <Button
-                    themeType="primary"
-                    onClick={() => {
-                      router.push('/auth/signin');
-                    }}
-                  >
-                    로그인 페이지로
-                  </Button>
-                </>
-              ) : (
-                <h1>생성중..</h1>
-              )}
-            </div>
+            <LoadingModalItem
+              isStart={status.isStart}
+              isDone={status.isDone}
+              code={status.code}
+              successMessage={{
+                title: '계정이 만들어졌습니다!',
+                subtitle:
+                  '아래 버튼을 눌러 로그인 페이지로 이동해 로그인하고 서비스를  이용해주세요',
+                targetPath: '/auth/signin',
+                buttonText: '로그인하기',
+              }}
+              errorMessage={[
+                {
+                  code: 409,
+                  title: '이미 존재하는 계정입니다!',
+                  subtitle: '원래의 계정으로 로그인 후 이용해주세요',
+                  targetPath: '/auth/signin',
+                  buttonText: '로그인하기',
+                },
+              ]}
+            />
           </Modal>
         )}
         <StaticImageWrapper
@@ -139,7 +133,7 @@ const SignupCard = () => {
             가입하기
           </Button>
         </div>
-      </div>
+      </>
     </Card>
   );
 };
