@@ -247,6 +247,7 @@ const CreateLeagueWrapper = () => {
             themeType="primary"
             onClick={() => {
               CCreateRequest(leagueData);
+              router.push('/');
             }}
           >
             대회 생성하기
