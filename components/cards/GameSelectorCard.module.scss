@@ -1,0 +1,19 @@
+.areadivider {
+  width: 12.5%;
+  padding: 0 0.5rem;
+}
+
+.swipearea {
+  position: relative;
+}
+
+.gamewrapper {
+  opacity: 45%;
+  color: black;
+
+  &:hover {
+    transition: opacity 300ms;
+    opacity: 1;
+    cursor: pointer;
+  }
+}

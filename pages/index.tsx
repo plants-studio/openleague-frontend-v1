@@ -5,28 +5,57 @@ import LeagueListArea from './../components/area/LeagueListArea';
 import HeroBannerCard from '../components/cards/HeroBannerCard';
 import LeagueSearchToolCard from '../components/cards/LeagueSearchToolCard';
 import CardRowLayout from '../components/templates/CardRowLayout';
+import GameSelectorCard from '../components/cards/GameSelectorCard';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import axios from 'axios';
+import { resolve } from 'path';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
-export default function Index() {
-  const [accessToken, setAccessToken] = useState(null);
+function test(id) {
+  console.log(id);
+}
 
-  const [UserName, setUserName] = useState('');
+// TODO 대회 게시물도 prefetch가 가능하도록 하기
 
+export default function Index({
+  leagueList,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
   useEffect(() => {
-    if (Cookies.get('accessToken') !== null && Cookies.get('name') !== null) {
-      setUserName(Cookies.get('name'));
-      setAccessToken(Cookies.get('accessToken'));
-    }
+    router.prefetch('/community');
+    router.prefetch('/home');
   }, []);
 
   return (
-    <div>
+    <>
       <GlobalLayout>
         <CardRowLayout>
           <HeroBannerCard />
           <LeagueSearchToolCard />
         </CardRowLayout>
-        <LeagueListArea />
+        <GameSelectorCard onClick={test} />
+        <LeagueListArea leagueList={leagueList} />
       </GlobalLayout>
-    </div>
+    </>
   );
+}
+
+export async function getStaticProps() {
+  const leagueList = await axios
+    .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`, {
+      params: {
+        page: 1,
+        limit: 24,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    props: {
+      leagueList,
+    },
+    revalidate: 1,
+  };
 }

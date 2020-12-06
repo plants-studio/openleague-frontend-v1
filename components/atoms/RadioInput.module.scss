@@ -1,0 +1,24 @@
+.wrapper {
+  width: max-content;
+  padding: 0.425rem 0.75rem;
+  border-radius: 300px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #e6e6e6;
+    transition: background-color 100ms ease-out;
+  }
+}
+
+.labelText {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: bold;
+  user-select: none;
+}
+
+.input {
+  display: none;
+}

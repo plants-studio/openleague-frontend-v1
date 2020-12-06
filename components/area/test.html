@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+
+   <!-- <link rel="stylesheet" type="text/css" href="./css/bom.css"> -->
+
+</head>
+
+
+<style>
+
+</style>
+
+<body>
+   계산식 입력 : <input type="text" id="expr"> <br>
+   계산 결과 : <input type="text" disabled id="result"> <br>
+
+   <br>
+
+   <input type="button" onclick="cal()" value="계산하기">
+
+
+</body>
+
+
+<script>
+
+   const cal = () => {
+      var ex = document.getElementById("expr").value;
+      var res = confirm(ex + "를 계산하시겠습니까?");
+      if(res){
+         document.getElementById("result").value = eval(ex);
+      }
+   }
+
+
+</script>
+
+
+</html>

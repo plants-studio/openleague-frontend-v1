@@ -1,8 +1,9 @@
+// TODO 사파리 브라우저에서는 gap이 제대로 지원되지 않음
 .wrapper {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  margin: 16px 0;
+  margin: 8px 0;
 
   @media screen and (max-width: 450px) {
     flex-direction: column;

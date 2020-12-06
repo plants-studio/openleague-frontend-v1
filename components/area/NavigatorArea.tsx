@@ -2,6 +2,7 @@ import React from 'react';
 import style from './NavigatorArea.module.scss';
 import { NavButton, Icon } from 'plants-ui';
 import { useRouter } from 'next/router';
+import MobileNavButton from './../atoms/MobileNavButton';
 
 interface IProps {
   isLeftNavigatorMode: boolean;
@@ -12,10 +13,13 @@ const NavigatorArea = ({ isLeftNavigatorMode }: IProps) => {
   return (
     <>
       {isLeftNavigatorMode ? (
-        <div className={style.verticalMode}>
+        <div className={style.verticalmode}>
           <NavButton
             width="100%"
-            isSelected={router.pathname === '/'}
+            isSelected={
+              router.pathname === '/' ||
+              router.pathname.split('/')[1] === 'openleague'
+            }
             onClick={() => {
               router.push('/');
             }}
@@ -25,7 +29,7 @@ const NavigatorArea = ({ isLeftNavigatorMode }: IProps) => {
           </NavButton>
           <NavButton
             width="100%"
-            isSelected={router.pathname === '/community'}
+            isSelected={router.pathname.split('/')[1] === 'community'}
             onClick={() => {
               router.push('/community');
             }}
@@ -35,7 +39,7 @@ const NavigatorArea = ({ isLeftNavigatorMode }: IProps) => {
           </NavButton>
           <NavButton
             width="100%"
-            isSelected={router.pathname === '/home'}
+            isSelected={router.pathname.split('/')[1] === 'home'}
             onClick={() => {
               router.push('/home');
             }}
@@ -44,7 +48,17 @@ const NavigatorArea = ({ isLeftNavigatorMode }: IProps) => {
           </NavButton>
         </div>
       ) : (
-        <div>모바일 뷰 준비중입니다!</div>
+        <div className={style.rowmode}>
+          <MobileNavButton icon="trophy" isSelected={true}>
+            오픈리그
+          </MobileNavButton>
+          <MobileNavButton icon="community" isSelected={false}>
+            커뮤니티
+          </MobileNavButton>
+          <MobileNavButton icon="Home" isSelected={false}>
+            홈
+          </MobileNavButton>
+        </div>
       )}
     </>
   );

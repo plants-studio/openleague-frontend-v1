@@ -1,0 +1,16 @@
+.buttonarea {
+  display: flex;
+  width: max-content;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+}
+
+.modalitemwrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

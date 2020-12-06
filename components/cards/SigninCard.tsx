@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
-import { Card } from 'plants-ui';
+import React, { useEffect, useState } from 'react';
+import { Card, Button } from 'plants-ui';
 import useUser from './../../src/hooks/useUser';
+import CustomInput from '../atoms/CustomInput';
+import { useRouter } from 'next/router';
+import StaticImageWrapper from '../atoms/StaticImageWrapper';
+import style from './SigninCard.module.scss';
 
+// TODO 로그인 리퀘스트를 걸었을때 로딩중인 애니메이션이 뜨게 하기
+// TODO 모달을 띄워서 존재하지 않는 계정입니다 등을 표시하기
 const SigninCard = () => {
-  const { isLogin, email, userName, CLoginRequest, CAuthLogout } = useUser();
+  const router = useRouter();
+  const { isLogin, isLoadDone, CLoginRequest } = useUser();
 
   const [account, setAccount] = useState({
     email: '',
@@ -17,45 +24,61 @@ const SigninCard = () => {
     });
   };
 
+  useEffect(() => {
+    if (isLogin) {
+      router.push('/');
+    }
+  }, [isLogin]);
+
   return (
-    <Card cardTitle="로그인">
+    <Card width="25rem">
       <div>
-        {isLogin ? <span>환영합니다!</span> : <span>로그인 안됨</span>}
-        <br />
-        <span>
-          이메일 : {email} | 이름 : {userName}
-        </span>
-        <br />
-        <input
+        <StaticImageWrapper
+          OptWidth={1071}
+          OptHeight={443}
+          width="100%"
+          imagePath="/images/logo.png"
+        />
+        <CustomInput
           type="text"
           name="email"
           placeholder="이메일"
+          width="100%"
           onChange={inputAccount}
-        ></input>
+        ></CustomInput>
         <br />
-        <input
+        <CustomInput
           type="password"
           name="password"
           placeholder="비밀번호"
+          width="100%"
+          margin="0.5rem 0 0 0"
           onChange={inputAccount}
+          onKeyPress={(e) => {
+            if (e.key == 'Enter') {
+              CLoginRequest(account);
+            }
+          }}
         />
         <br />
-        <button
-          type="button"
-          onClick={() => {
-            CLoginRequest(account);
-          }}
-        >
-          로그인
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            CAuthLogout();
-          }}
-        >
-          로그아웃
-        </button>
+        <div className={style.buttonarea}>
+          <Button
+            themeType="primary"
+            onClick={() => {
+              CLoginRequest(account);
+            }}
+          >
+            로그인
+          </Button>
+          <Button
+            themeType="secondary"
+            onClick={() => {
+              router.push('/auth/signup');
+            }}
+          >
+            회원가입
+          </Button>
+        </div>
       </div>
     </Card>
   );

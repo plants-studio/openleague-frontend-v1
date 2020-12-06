@@ -8,6 +8,7 @@ const DividerLine = ({ margin }: IProps) => {
   return <hr style={linestyle(margin)} />;
 };
 
+// TODO 일반적인 마진 방식으로 바꾸기
 const linestyle = (margin) => {
   const text = {
     color: '#E8EBF3',

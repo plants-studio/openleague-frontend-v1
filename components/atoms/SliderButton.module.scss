@@ -1,0 +1,33 @@
+// TODO 과도한 flexbox 사용 제거
+.buttondiv {
+  border-radius: 300px;
+  position: absolute;
+  z-index: 40;
+  top: 25%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0be;
+  cursor: pointer;
+
+  &:hover {
+    transition: background-color 100ms ease-out;
+    background-color: #e6e6e6;
+  }
+
+  &__icon {
+    color: rgb(179, 179, 179);
+    padding: auto auto;
+    width: 30%;
+  }
+}
+
+.left {
+  left: -10px;
+}
+
+.right {
+  right: -10px;
+}

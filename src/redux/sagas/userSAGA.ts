@@ -5,13 +5,17 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-  RELOAD,
+  RELOAD_REQUEST,
   REFRESH_REQUEST,
   REFRESH_SUCCESS,
   REFRESH_FAILURE,
+  RELOAD_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
 } from '../reducer/userReducer';
 import Cookies from 'js-cookie';
-import { getDecodedData } from '../../utils/decode';
+import { getDecodedAccessTokenData } from '../../utils/decode';
 import {
   saveTokensToCookie,
   searchRefreshToken,
@@ -22,8 +26,9 @@ import {
 export function* userSaga() {
   yield takeEvery(LOGIN_REQUEST, loginRequestSaga);
   yield takeEvery(LOGOUT, logoutSaga);
-  yield takeEvery(RELOAD, reloadSaga);
+  yield takeEvery(RELOAD_REQUEST, reloadSaga);
   yield takeEvery(REFRESH_REQUEST, refreshRequestSaga);
+  yield takeEvery(SIGNUP_REQUEST, signupRequestSaga);
 }
 
 // REVIEW
@@ -37,13 +42,23 @@ function* loginRequestSaga(action) {
     );
     if (response.status === 200) {
       saveTokensToCookie(response.data.accessToken, response.data.refreshToken);
-      const { email, userName, userCode } = getDecodedData();
+      const {
+        email,
+        userName,
+        userCode,
+        userProfileImage,
+        userId,
+        isAdmin,
+      } = getDecodedAccessTokenData();
       yield put({
         type: LOGIN_SUCCESS,
         payload: {
           email: email,
           userName: userName,
           userCode: userCode,
+          userProfileImage: userProfileImage,
+          userId: userId,
+          isAdmin: isAdmin,
         },
       });
     }
@@ -65,8 +80,9 @@ function* logoutSaga(action) {
 function* reloadSaga(action) {
   const refreshToken = yield call(searchRefreshToken);
   if (refreshToken) {
-    console.log('refresh start!');
     yield put({ type: REFRESH_REQUEST });
+  } else {
+    yield put({ type: RELOAD_FAILURE });
   }
 }
 
@@ -75,19 +91,51 @@ function* refreshRequestSaga(action) {
   try {
     const response = yield call(AauthRefresh);
     if (response.status === 200) {
+      yield call(AauthRevoke, 'accessToken');
+      yield call(AauthRevoke, 'refreshToken');
       saveTokensToCookie(response.data.accessToken, response.data.refreshToken);
-      const { email, userName, userCode } = getDecodedData();
+      const {
+        email,
+        userName,
+        userCode,
+        userProfileImage,
+        userId,
+        isAdmin,
+      } = getDecodedAccessTokenData();
       yield put({
         type: REFRESH_SUCCESS,
         payload: {
           email: email,
           userName: userName,
           userCode: userCode,
+          userProfileImage: userProfileImage,
+          userId: userId,
+          isAdmin: isAdmin,
         },
       });
     }
   } catch (e) {
     yield put({ type: REFRESH_FAILURE });
+  }
+}
+
+// NOTE SAGA FUNCTION
+function* signupRequestSaga(action) {
+  try {
+    const response = yield call(
+      AauthSignup,
+      action.payload.name,
+      action.payload.email,
+      action.payload.password,
+    );
+    if (response.status === 200) {
+      yield put({
+        type: SIGNUP_SUCCESS,
+      });
+    }
+  } catch (e) {
+    yield call(asSignupFailed, e);
+    yield put({ type: SIGNUP_FAILURE });
   }
 }
 
@@ -109,8 +157,27 @@ const asLoginFailed = (e) => {
   }
 };
 
+const asSignupFailed = (e) => {
+  switch (e.response.status) {
+    case 409:
+      alert('이미 존재하는 계정입니다!');
+      break;
+    default:
+      alert('알수 없는 오류가 발생했습니다.');
+      break;
+  }
+};
+
 function AauthSignin(email: string, password: string) {
   return axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/signin`, {
+    email,
+    password,
+  });
+}
+
+function AauthSignup(name: string, email: string, password: string) {
+  return axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/auth/signup`, {
+    name,
     email,
     password,
   });
