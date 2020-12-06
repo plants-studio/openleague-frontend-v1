@@ -12,32 +12,42 @@ export default function useLeague() {
   const CCreateRequest = async (leagueData) => {
     if (!leagueData.thumbnail) {
       console.log('no file!');
-    }
-    try {
-      new Compressor(leagueData.thumbnail, {
-        quality: 1,
-        success(result) {
-          const reader = new FileReader();
-          reader.readAsDataURL(result);
-          reader.onloadend = async () => {
-            const base64data = reader.result;
-            await axios.post(
-              `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`,
-              { ...leagueData, thumbnail: base64data },
-              {
-                headers: {
-                  Authorization: `Bearer ${Cookies.get('accessToken')}`,
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`,
+        { ...leagueData, thumbnail: undefined },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('accessToken')}`,
+          },
+        },
+      );
+    } else {
+      try {
+        new Compressor(leagueData.thumbnail, {
+          quality: 1,
+          success(result) {
+            const reader = new FileReader();
+            reader.readAsDataURL(result);
+            reader.onloadend = async () => {
+              const base64data = reader.result;
+              await axios.post(
+                `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league`,
+                { ...leagueData, thumbnail: base64data },
+                {
+                  headers: {
+                    Authorization: `Bearer ${Cookies.get('accessToken')}`,
+                  },
                 },
-              },
-            );
-          };
-        },
-        error(err) {
-          console.log(err.message);
-        },
-      });
-    } catch (err) {
-      console.log('error!');
+              );
+            };
+          },
+          error(err) {
+            console.log(err.message);
+          },
+        });
+      } catch (err) {
+        console.log('error!');
+      }
     }
   };
 
@@ -46,11 +56,8 @@ export default function useLeague() {
     leagueId: string | string[],
     isImageChange: boolean,
   ) => {
-    console.log(leagueData.thumbnail);
+    setStatus({ ...status, isStart: true, isDone: false, code: undefined });
     if (!isImageChange) {
-      console.log('썸네일 변경이 없습니다');
-      console.log('Target League : ' + leagueId);
-      console.log(leagueData);
       await axios
         .put(
           `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${leagueId}`,
@@ -62,7 +69,20 @@ export default function useLeague() {
           },
         )
         .then((response) => {
-          console.log('PUT : ' + response.status);
+          setStatus({
+            ...status,
+            isStart: false,
+            isDone: true,
+            code: response.status,
+          });
+        })
+        .catch((error) => {
+          setStatus({
+            ...status,
+            isStart: false,
+            isDone: true,
+            code: error.response.status,
+          });
         });
     }
     try {
@@ -73,15 +93,32 @@ export default function useLeague() {
           reader.readAsDataURL(result);
           reader.onloadend = async () => {
             const base64data = reader.result;
-            await axios.put(
-              `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${leagueId}`,
-              { ...leagueData, thumbnail: base64data },
-              {
-                headers: {
-                  Authorization: `Bearer ${Cookies.get('accessToken')}`,
+            await axios
+              .put(
+                `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${leagueId}`,
+                { ...leagueData, thumbnail: base64data },
+                {
+                  headers: {
+                    Authorization: `Bearer ${Cookies.get('accessToken')}`,
+                  },
                 },
-              },
-            );
+              )
+              .then((response) => {
+                setStatus({
+                  ...status,
+                  isStart: false,
+                  isDone: true,
+                  code: response.status,
+                });
+              })
+              .catch((error) => {
+                setStatus({
+                  ...status,
+                  isStart: false,
+                  isDone: true,
+                  code: error.response.status,
+                });
+              });
           };
         },
         error(err) {

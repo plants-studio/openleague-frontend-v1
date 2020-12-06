@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router';
 import { Button, Card } from 'plants-ui';
 import React, { useEffect } from 'react';
-import LeagueDetailActionCard from '../cards/LeagueDetailActionCard';
 import CardGroup from '../utility/CardGroup';
 import style from './LeagueDetailArea.module.scss';
 import { getFormattedLeagueSchedule } from '../../src/utils/league';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+//import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+
 import dynamic from 'next/dynamic';
 import { ViewerProps } from '@toast-ui/react-editor';
-import DividerLine from '../atoms/DividerLine';
 import LeagueBasicInformation from '../cards/LeagueBasicInformation';
 import UtilityBarCard from '../cards/UtilityBarCard';
 import useUser from '../../src/hooks/useUser';
@@ -68,7 +67,7 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
                   });
                 }}
               >
-                대회 관리{' '}
+                대회 관리
               </Button>
             </>
           ) : (
@@ -84,8 +83,6 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
                 console.log('DONE');
               }}
             />
-            <DividerLine margin="1rem 0" />
-            <Viewer initialValue={leagueDetail.introduce} />
           </div>
         </Card>
         <LeagueBasicInformation
@@ -99,6 +96,9 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
           location={leagueDetail.location}
           discordLink={leagueDetail.discordLink}
         />
+        <Card cardTitle="대회 소개">
+          <Viewer initialValue={leagueDetail.introduce} />
+        </Card>
         <Card cardTitle="대회 규정">
           <Viewer initialValue={leagueDetail.rule} />
         </Card>

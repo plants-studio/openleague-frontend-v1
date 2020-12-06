@@ -19,8 +19,9 @@ const LeagueCode = {
   LeagueOfLegend: '#0CA76A',
   Overwatch: '#FC9826',
   Valorant: '#FF4654',
-  Battleground: 'zh',
+  Battleground: '#05ACF6',
   RainbowSixSiege: '#5F5F5F',
+  Etc: '#995FE1',
 } as const;
 
 // TODO map 방식으로 동작되는 리스트 만들기
@@ -52,7 +53,11 @@ const LeagueListArea = ({ leagueList }: IProps) => {
               league.teamMin,
             )}
             applicant={league.applicant}
-            applicantMinMax={league.teamMin}
+            applicantMinMax={getApplicationMinMax(
+              league.teamReqMemCnt,
+              league.teamMin,
+              league.teamMax,
+            )}
             color={LeagueCode[`${league.game.replace(/ /g, '')}`]}
             thumbnail={league.thumbnail}
             onClick={() => {
@@ -65,16 +70,26 @@ const LeagueListArea = ({ leagueList }: IProps) => {
           />
         ))}
       </div>
-
-      <button
-        onClick={() => {
-          console.log('더보기!');
-        }}
-      >
-        테스트
-      </button>
     </>
   );
+};
+
+const getApplicationMinMax = (
+  teamReqMemCnt: number,
+  teamMin: number,
+  teamMax: number,
+) => {
+  if (teamMin === teamMin) {
+    const data: string = `${teamMin * teamReqMemCnt}명`;
+    return data;
+  } else {
+    const data: string =
+      teamMin * teamReqMemCnt +
+      '명 이상 ' +
+      teamMax * teamReqMemCnt +
+      '명 이하';
+    return data;
+  }
 };
 
 export default LeagueListArea;

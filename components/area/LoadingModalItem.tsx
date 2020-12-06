@@ -34,7 +34,7 @@ const LoadingModalItem = ({
   const router = useRouter();
   return (
     <div className={style.wrapper}>
-      {isStart && <h1>계정을 생성중입니다..</h1>}
+      {isStart && <h1>로딩중입니다..</h1>}
       {isDone && (
         <>
           {code === 200 && (
@@ -103,7 +103,49 @@ const LoadingModalItem = ({
               </Button>
             </>
           )}
-          {code == 200 || code == 409 ? (
+          {code === 401 && (
+            <>
+              <StaticImageWrapper
+                width="70%"
+                OptWidth={535}
+                OptHeight={221}
+                imagePath="/images/logo.png"
+              />
+              <span className={style.header}>
+                {
+                  errorMessage.find((element) => {
+                    return element.code === 401;
+                  }).title
+                }
+              </span>
+              <div className={style.textarea}>
+                <span className={style.textarea__text}>
+                  {
+                    errorMessage.find((element) => {
+                      return element.code === 401;
+                    }).subtitle
+                  }
+                </span>
+              </div>
+              <Button
+                themeType="primary"
+                onClick={() => {
+                  router.push(
+                    errorMessage.find((element) => {
+                      return element.code === 401;
+                    }).targetPath,
+                  );
+                }}
+              >
+                {
+                  errorMessage.find((element) => {
+                    return element.code === 401;
+                  }).buttonText
+                }
+              </Button>
+            </>
+          )}
+          {code == 200 || code == 409 || code == 401 ? (
             <></>
           ) : (
             <>

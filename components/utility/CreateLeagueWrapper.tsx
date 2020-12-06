@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useLeague from '../../src/hooks/useLeague';
 import { Button, Card } from 'plants-ui';
 import WysiwygEditor from '../../components/utility/WysiwygEditor';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import 'codemirror/lib/codemirror.css';
 import CustomInput from '../atoms/CustomInput';
 import RadioInput from '../../components/atoms/RadioInput';
@@ -161,7 +160,7 @@ const CreateLeagueWrapper = () => {
             type="number"
             name="teamReqMemCnt"
             onChange={handleNumber}
-            placeholder="팀 인원(팀원의 수)"
+            placeholder="팀 인원(개인전일때는 1명)"
           ></CustomInput>
           <CustomInput
             width="100%"

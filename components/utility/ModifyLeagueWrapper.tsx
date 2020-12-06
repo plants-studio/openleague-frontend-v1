@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import useLeague from '../../src/hooks/useLeague';
 import { Button, Card, SubHeader } from 'plants-ui';
 import WysiwygEditor from '../../components/utility/WysiwygEditor';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import 'codemirror/lib/codemirror.css';
 import CustomInput from '../atoms/CustomInput';
 import RadioInput from '../../components/atoms/RadioInput';
@@ -12,11 +11,13 @@ import { useRouter } from 'next/router';
 import UtilityBarCard from '../cards/UtilityBarCard';
 import axios from 'axios';
 import CardGroup from './CardGroup';
+import Modal from './Modal';
+import LoadingModalItem from '../area/LoadingModalItem';
 
 // 새로고침해도 데이터가 들어와있도록 하기
 const ModifyLeagueWrapper = () => {
   const router = useRouter();
-  const { CEditRequest } = useLeague();
+  const { status, CEditRequest } = useLeague();
   const [isLoad, setIsLoad] = useState(false);
   const [isImageChange, setIsImageChange] = useState(false);
   const [leagueId, setLeagueId] = useState('');
@@ -37,13 +38,25 @@ const ModifyLeagueWrapper = () => {
     location: '',
     status: '',
   });
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   useEffect(() => {
     console.log('run useEffect');
-    const leagueId = router.query._id;
+    const localLeagueId: string = router.query._id as string;
+    setLeagueId(localLeagueId);
     const fetchLeague = async () => {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${leagueId}`, {})
+        .get(
+          `${process.env.NEXT_PUBLIC_BACKEND}/api/v1/league/${localLeagueId}`,
+          {},
+        )
         .then((response) => {
           const data = response.data;
           setLeagueData({
@@ -114,6 +127,44 @@ const ModifyLeagueWrapper = () => {
 
   return (
     <CardGroup>
+      {modalVisible && (
+        <Modal
+          visible={modalVisible}
+          closable={false}
+          maskClosable={false}
+          onClose={closeModal}
+        >
+          <LoadingModalItem
+            isStart={status.isStart}
+            isDone={status.isDone}
+            code={status.code}
+            successMessage={{
+              title: '대회 수정 완료!',
+              subtitle: '이번 수정으로 더욱 완벽한 대회가 될 거에요.',
+              targetPath: `/openleague/${leagueId}`,
+              buttonText: '대회로 돌아가기',
+            }}
+            errorMessage={[
+              {
+                code: 404,
+                title: '예기치 못한 오류 발생!',
+                subtitle:
+                  '대회 수정에 어려움을 겪는다면 plantstoen@gmail.com 으로 문의주세요:D',
+                targetPath: `/openleague/${leagueId}/modify-league`,
+                buttonText: '수정중인 페이지로 돌아가기',
+              },
+              {
+                code: 401,
+                title: '인증 오류',
+                subtitle:
+                  '흠... 정말 대회 생성자가 맞나요? 로그인 여부를 확인한 뒤 다시 시도해주세요',
+                targetPath: '/',
+                buttonText: '목록으로',
+              },
+            ]}
+          />
+        </Modal>
+      )}
       <div className={style.wrapper} style={{ width: '100%' }}>
         <UtilityBarCard margin="0 0 0.5rem 0">
           <span
@@ -219,7 +270,7 @@ const ModifyLeagueWrapper = () => {
               type="number"
               name="teamReqMemCnt"
               onChange={handleNumber}
-              placeholder="팀 인원(팀원의 수)"
+              placeholder="팀 인원(개인전일때는 1명)"
               value={leagueData.teamReqMemCnt}
             ></CustomInput>
             <CustomInput
@@ -316,8 +367,7 @@ const ModifyLeagueWrapper = () => {
             <Button
               themeType="primary"
               onClick={() => {
-                console.log(leagueData);
-                console.log('-----');
+                openModal();
                 CEditRequest(leagueData, router.query._id, isImageChange);
               }}
             >

@@ -3,6 +3,7 @@ import App, { AppInitialProps, AppContext } from 'next/app';
 import { wrapper } from '../src/redux/store';
 import Head from 'next/head';
 import './../styles/globals.css';
+import './../styles/custom-toastui.css';
 import type { AppProps } from 'next/app';
 import useUser from './../src/hooks/useUser';
 
