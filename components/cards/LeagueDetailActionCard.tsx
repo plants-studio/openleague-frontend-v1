@@ -45,18 +45,9 @@ const LeagueDetailActionCard = ({
           </div>
           <DividerLine margin="1rem" />
           <div className={style.buttonarea}>
-            <Button
-              themeType="primary"
-              onClick={() => {
-                router.push({
-                  pathname: '/openleague/[_id]/create-team',
-                  query: { _id: leagueId },
-                });
-              }}
-            >
-              팀 생성
+            <Button themeType="primary" onClick={() => {}}>
+              참가 신청
             </Button>
-            <Button themeType="secondary">팀 참여</Button>
           </div>
         </Card>
       </div>
