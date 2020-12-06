@@ -48,6 +48,7 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
           {userId === leagueDetail.host ? (
             <>
               <Button
+                margin="0 0 0 1rem"
                 themeType="secondary"
                 onClick={() => {
                   router.push({
@@ -59,6 +60,7 @@ const LeagueDetailArea = ({ leagueDetail }: IProps) => {
                 대회정보 수정
               </Button>
               <Button
+                margin="0 0 0 1rem"
                 themeType="secondary"
                 onClick={() => {
                   router.push({
