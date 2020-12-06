@@ -30,10 +30,11 @@ export default function Index({
   return (
     <>
       <GlobalLayout>
+        {/* 
         <CardRowLayout>
           <HeroBannerCard />
           <LeagueSearchToolCard />
-        </CardRowLayout>
+        </CardRowLayout>*/}
         <GameSelectorCard onClick={test} />
         <LeagueListArea leagueList={leagueList} />
       </GlobalLayout>

@@ -21,7 +21,7 @@ export default function ModifyLeague({ leagueDetail }) {
             host={leagueDetail.host}
             status={leagueDetail.status}
             leagueId={leagueDetail._id}
-          ></LeagueDetailActionCard>{' '}
+          ></LeagueDetailActionCard>
         </div>
       </GlobalLayout>
     </div>

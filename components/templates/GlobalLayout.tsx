@@ -47,8 +47,6 @@ const Child = ({ children }: IProps) => {
               <DividerLine margin="20px" />
               <NavigatorArea isLeftNavigatorMode={true} />
               <DividerLine margin="20px" />
-              <NavigatorNotificationArea />
-              <DividerLine margin="20px" />
             </div>
             <NavigatorActionArea />
           </div>
